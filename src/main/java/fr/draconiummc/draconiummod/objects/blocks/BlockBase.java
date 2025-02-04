@@ -17,6 +17,7 @@ public class BlockBase extends Block implements IHasModel
         super(material);
         this.setUnlocalizedName(name);
         this.setRegistryName(name);
+        this.setHardness(5.0F);
         this.setCreativeTab(DraconiumMod.DRACONIUMMODTAB);
 
         BlockInit.BLOCKS.add(this);
