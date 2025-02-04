@@ -1,13 +1,13 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
+  "modid": "draconiummod",
+  "name": "Draconium Mod",
   "description": "Example placeholder mod.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
+  "authorList": ["FrozerYTB"],
   "credits": "The Forge and FML guys, for making this example",
   "logoFile": "",
   "screenshots": [],
