@@ -4,13 +4,17 @@ import fr.draconiummc.draconiummod.init.BlockInit;
 import fr.draconiummc.draconiummod.init.ItemInit;
 import fr.draconiummc.draconiummod.utils.IHasModel;
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 @Mod.EventBusSubscriber
 public class RegistryHandler {
@@ -18,6 +22,11 @@ public class RegistryHandler {
     @SubscribeEvent
     public static void onItemRegister(RegistryEvent.Register<Item> event) {
         event.getRegistry().registerAll(ItemInit.ITEMS.toArray(new Item[0]));
+    }
+
+    @SubscribeEvent
+    public static void onBlockRegister(RegistryEvent.Register<Block> event) {
+        event.getRegistry().registerAll(BlockInit.BLOCKS.toArray(new Block[0]));
     }
 
     @SubscribeEvent
@@ -36,14 +45,59 @@ public class RegistryHandler {
     }
 
     @SubscribeEvent
-    public static void onBlockRegister(RegistryEvent.Register<Block> event) {
-        event.getRegistry().registerAll(BlockInit.BLOCKS.toArray(new Block[0]));
+    public static void onPlayerTick(TickEvent.PlayerTickEvent e)
+    {
+        EntityPlayer player = e.player;
+        if(e.player.world.getBlockState(new BlockPos(player.posX, player.posY - 1, player.posZ)).getBlock() == BlockInit.ELEVATOR)
+        {
+            if(player.isSneaking())
+            {
+                for(int i = (int)(player.posY - 2); i > 0; i--)
+                {
+                    if(e.player.world.getBlockState(new BlockPos(player.posX, i, player.posZ)).getBlock() == BlockInit.ELEVATOR)
+                    {
+                        BlockPos pos = new BlockPos(player.posX, i, player.posZ);
 
-        // Enregistrer les ItemBlocks
-        for (Block block : BlockInit.BLOCKS) {
-            ItemInit.ITEMS.add(new ItemBlock(block).setRegistryName(block.getRegistryName()));
+                        player.setPosition(player.posX, pos.getY() + 1, player.posZ);
+
+                    }
+                }
+            }
         }
     }
+
+    public static double getElevatorJump(EntityPlayer player)
+    {
+        int u = 0;
+
+        for(int i = (int)player.posY + 1; i < 256; i++)
+        {
+
+            BlockPos pos = new BlockPos(player.posX, i, player.posZ);
+
+            if(player.world.getBlockState(pos).getBlock() == BlockInit.ELEVATOR)
+            {
+                u = i;
+                return i;
+            }
+        }
+        return u;
+    }
+
+    @SubscribeEvent
+    public static void playerJumpingEvent(LivingEvent.LivingJumpEvent e)
+    {
+        if(e.getEntityLiving() instanceof EntityPlayer)
+        {
+            EntityPlayer player = (EntityPlayer)e.getEntityLiving();
+
+            if(player.world.getBlockState(new BlockPos(player.posX, player.posY - 1, player.posZ)).getBlock() == BlockInit.ELEVATOR)
+            {
+                player.setPosition(player.posX, getElevatorJump(player) + 1, player.posZ);
+            }
+        }
+    }
+
 
     public static void preInitRegistries(FMLPreInitializationEvent event)
     {

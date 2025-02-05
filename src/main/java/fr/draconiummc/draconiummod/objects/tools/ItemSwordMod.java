@@ -1,20 +1,24 @@
-package fr.draconiummc.draconiummod.objects.items;
+package fr.draconiummc.draconiummod.objects.tools;
+
+
 
 import fr.draconiummc.draconiummod.DraconiumMod;
 import fr.draconiummc.draconiummod.init.CreativeTabInit;
-import fr.draconiummc.draconiummod.init.ItemInit;
 import fr.draconiummc.draconiummod.utils.IHasModel;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemSpade;
+import net.minecraft.item.ItemSword;
 
-public class ItemBase extends Item implements IHasModel
+public class ItemSwordMod extends ItemSword implements IHasModel
 {
-    public ItemBase(String name)
+
+    public ItemSwordMod(String name, ToolMaterial material)
     {
+        super(material);
         setUnlocalizedName(name);
         setRegistryName(name);
-        setCreativeTab(CreativeTabInit.DRACONIUM_MISC);
-
+        setCreativeTab(CreativeTabInit.DRACONIUM_WEAPONS);
         ItemInit.ITEMS.add(this);
     }
 
@@ -23,4 +27,5 @@ public class ItemBase extends Item implements IHasModel
     {
         DraconiumMod.proxy.registerItemRenderer(this, 0, "inventory");
     }
+
 }
