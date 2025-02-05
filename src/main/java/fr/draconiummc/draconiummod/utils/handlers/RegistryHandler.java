@@ -5,6 +5,7 @@ import fr.draconiummc.draconiummod.init.ItemInit;
 import fr.draconiummc.draconiummod.utils.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -34,11 +35,15 @@ public class RegistryHandler {
         }
     }
 
-@SubscribeEvent
-public static void onBlockRegister(RegistryEvent.Register<Block> event)
-{
-    event.getRegistry().registerAll(BlockInit.BLOCKS.toArray(new Block[0]));
-}
+    @SubscribeEvent
+    public static void onBlockRegister(RegistryEvent.Register<Block> event) {
+        event.getRegistry().registerAll(BlockInit.BLOCKS.toArray(new Block[0]));
+
+        // Enregistrer les ItemBlocks
+        for (Block block : BlockInit.BLOCKS) {
+            ItemInit.ITEMS.add(new ItemBlock(block).setRegistryName(block.getRegistryName()));
+        }
+    }
 
     public static void preInitRegistries(FMLPreInitializationEvent event)
     {
