@@ -10,6 +10,7 @@ import com.ibm.icu.impl.BOCU;
 
 import fr.draconiummc.draconiummod.DraconiumMod;
 import fr.draconiummc.draconiummod.init.CreativeTabInit;
+import fr.draconiummc.draconiummod.init.ItemInit;
 import fr.draconiummc.draconiummod.utils.IHasModel;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

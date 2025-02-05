@@ -28,6 +28,8 @@ public class DraconiumMod
         CreativeTabInit.DRACONIUM_WEAPONS.getTabIconItem();
     }
 
+    public static org.apache.logging.log4j.Logger logger;
+
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {

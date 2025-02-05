@@ -3,6 +3,7 @@ package fr.draconiummc.draconiummod.utils.handlers;
 import fr.draconiummc.draconiummod.init.BlockInit;
 import fr.draconiummc.draconiummod.init.ItemInit;
 import fr.draconiummc.draconiummod.utils.IHasModel;
+import fr.draconiummc.draconiummod.world.WorldGenCustomOres;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -15,6 +16,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod.EventBusSubscriber
 public class RegistryHandler {
@@ -101,6 +103,7 @@ public class RegistryHandler {
 
     public static void preInitRegistries(FMLPreInitializationEvent event)
     {
+        GameRegistry.registerWorldGenerator(new WorldGenCustomOres(), 0);
     }
 
     public static void initRegistries()

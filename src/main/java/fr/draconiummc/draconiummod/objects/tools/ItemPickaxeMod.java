@@ -8,6 +8,7 @@ import com.google.common.collect.Multimap;
 
 import fr.draconiummc.draconiummod.DraconiumMod;
 import fr.draconiummc.draconiummod.init.CreativeTabInit;
+import fr.draconiummc.draconiummod.init.ItemInit;
 import fr.draconiummc.draconiummod.utils.IHasModel;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
