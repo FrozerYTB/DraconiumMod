@@ -26,13 +26,12 @@ public class ItemAxeMod extends ItemAxe implements IHasModel
 
     public ItemAxeMod(String name, ToolMaterial material)
     {
-        // ⚠️ Problème corrigé : Ajout des valeurs d'attaque et de vitesse correctes
+
         super(material, material.getAttackDamage(), -3.0F);
 
         setUnlocalizedName(name);
         setRegistryName(name);
         setCreativeTab(CreativeTabInit.DRACONIUM_TOOLS);
-
         ItemInit.ITEMS.add(this);
     }
 

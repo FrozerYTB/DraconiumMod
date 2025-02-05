@@ -1,0 +1,9 @@
+{
+  "variants":
+  {
+    "normal":
+    {
+      "model": "draconiummod:random_ore"
+    }
+  }
+}

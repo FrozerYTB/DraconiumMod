@@ -1,9 +1,7 @@
 package fr.draconiummc.draconiummod.init;
 
-import fr.draconiummc.draconiummod.objects.blocks.BlockBase;
-import fr.draconiummc.draconiummod.objects.blocks.BlockRessources;
-import fr.draconiummc.draconiummod.objects.blocks.CaveBlock;
-import fr.draconiummc.draconiummod.objects.blocks.Elevator;
+import fr.draconiummc.draconiummod.objects.blocks.BlockRandomOre;
+import fr.draconiummc.draconiummod.objects.blocks.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
@@ -19,6 +17,8 @@ public class BlockInit
     public static final Block DRACONIUM_ORE = new BlockRessources("draconium_ore", Material.ROCK);
 
     public static final Block NOXIUM_ORE = new BlockRessources("draconium_ore", Material.ROCK);
+
+    public static final Block RANDOM_ORE = new BlockRandomOre("random_ore", Material.ROCK);
 
     public static final Block DRACONIUM_BLOCK = new BlockRessources("draconium_block", Material.IRON);
 

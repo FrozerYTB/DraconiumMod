@@ -47,7 +47,7 @@ public class ItemInit {
     public static final Item PYRONITE_BOOTS = new ArmorBase("pyronite_boots", PYRONITE_ARMOR, 1, EntityEquipmentSlot.FEET);
 
     public static final Item DRACONIUM_HELMET = new ArmorBase("draconium_helmet", DRACONIUM_ARMOR, 1, EntityEquipmentSlot.HEAD);
-    public static final Item DRACONIUM_CHESTPLATE = new ArmorBase("draconium_chestplate", DRACONIUM_ARMOR, 1, EntityEquipmentSlot.CHEST);
+    public static final Item DRACONIUM_CHESTPLATE = new ArmorBase("draconium_chestplate", DRACONIUM_ARMOR , 1, EntityEquipmentSlot.CHEST);
     public static final Item DRACONIUM_LEGGINGS = new ArmorBase("draconium_leggings", DRACONIUM_ARMOR, 2, EntityEquipmentSlot.LEGS);
     public static final Item DRACONIUM_BOOTS = new ArmorBase("draconium_boots", DRACONIUM_ARMOR, 1, EntityEquipmentSlot.FEET);
 
