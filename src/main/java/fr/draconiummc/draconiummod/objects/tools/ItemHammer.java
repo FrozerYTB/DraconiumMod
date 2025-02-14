@@ -121,10 +121,26 @@ public class ItemHammer extends ItemPickaxe implements IHasModel
     {
         BlockPos pos = new BlockPos(x, y, z);
 
-        if(w.getBlockState(pos).getBlockHardness(w, pos) >= 0 && w.getBlockState(pos).getBlock().getMaterial(w.getBlockState(pos).getBlock().getDefaultState()) == Material.ROCK)
-        {
+        if (w.getBlockState(pos).getBlock() == net.minecraft.init.Blocks.STONE) {
             w.getBlockState(pos).getBlock().harvestBlock(w, p, pos, w.getBlockState(pos), w.getTileEntity(pos), breaker);
             w.setBlockToAir(pos);
         }
     }
+
+
+    //ENCHANT
+
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack, net.minecraft.enchantment.Enchantment enchantment) {
+        return enchantment != net.minecraft.init.Enchantments.MENDING && super.canApplyAtEnchantingTable(stack, enchantment);
+    }
+
+    @Override
+    public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
+        if (net.minecraft.enchantment.EnchantmentHelper.getEnchantments(book).containsKey(net.minecraft.init.Enchantments.MENDING)) {
+            return false;
+        }
+        return super.isBookEnchantable(stack, book);
+    }
+
 }

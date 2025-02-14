@@ -2,7 +2,7 @@
 {
   "modid": "draconiummod",
   "name": "Draconium Mod",
-  "description": "Ce mod est le mod principal du serveur Draconium MC !",
+  "description": "Ce mod est le mod principal du serveur DraconiumMC !",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
