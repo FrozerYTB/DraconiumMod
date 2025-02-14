@@ -15,11 +15,8 @@ apply plugin: 'idea'
 
 idea { module { inheritOutputDirs = true } }
 
-sourceSets {
-    main {
-        output.resourcesDir = output.classesDir
-    }
-}
+sourceSets.main.resources { srcDir 'src/main/resources' }
+
 version = '1.0'
 group = 'fr.draconiummc.draconiummod'
 archivesBaseName = 'draconiummod'

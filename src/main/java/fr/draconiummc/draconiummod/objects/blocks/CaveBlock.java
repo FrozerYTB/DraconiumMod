@@ -33,8 +33,7 @@ public class CaveBlock extends Block implements IHasModel
     }
 
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer func_180664_k()
-    {
+    public BlockRenderLayer getBlockRenderLayer() {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
 }

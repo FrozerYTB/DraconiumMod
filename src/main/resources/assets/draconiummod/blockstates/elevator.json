@@ -3,7 +3,7 @@
   {
     "normal":
     {
-      "model": "draconiummod:elevator"
+      "model": "draconiummod:block/elevator"
     }
   }
 }
