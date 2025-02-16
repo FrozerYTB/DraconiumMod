@@ -4,6 +4,7 @@ import fr.draconiummc.draconiummod.init.CreativeTabInit;
 import fr.draconiummc.draconiummod.proxy.CommonProxy;
 import fr.draconiummc.draconiummod.utils.Reference;
 import fr.draconiummc.draconiummod.utils.handlers.RegistryHandler;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -38,6 +39,7 @@ public class DraconiumMod
     @Mod.EventHandler
     public void Init(FMLPreInitializationEvent event)
     {
+
         RegistryHandler.initRegistries();
     }
 

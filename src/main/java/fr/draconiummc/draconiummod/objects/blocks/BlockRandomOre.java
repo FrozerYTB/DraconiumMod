@@ -80,8 +80,8 @@ public class BlockRandomOre extends Block {
                 10.0,  // DIAMANT
                 25.0,  // LAPIS-LAZULI
                 25.0,  // REDSTONE
-                4.0,   // PYRONITE
-                1.5,   // DRACONIUM
+                3.0,   // PYRONITE
+                1.2,   // DRACONIUM
                 0.7    // NOXIUM
         };
 

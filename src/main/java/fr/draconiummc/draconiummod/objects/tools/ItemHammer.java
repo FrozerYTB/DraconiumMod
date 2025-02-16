@@ -5,8 +5,10 @@ import fr.draconiummc.draconiummod.init.CreativeTabInit;
 import fr.draconiummc.draconiummod.init.ItemInit;
 import fr.draconiummc.draconiummod.utils.IHasModel;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -14,6 +16,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+
+import java.util.Arrays;
+import java.util.Map;
 
 public class ItemHammer extends ItemPickaxe implements IHasModel
 {
@@ -119,14 +124,29 @@ public class ItemHammer extends ItemPickaxe implements IHasModel
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, net.minecraft.enchantment.Enchantment enchantment) {
-        return enchantment != net.minecraft.init.Enchantments.MENDING && super.canApplyAtEnchantingTable(stack, enchantment);
+        if (enchantment == Enchantments.MENDING ||
+                enchantment == Enchantments.SILK_TOUCH ||
+                enchantment == Enchantments.FORTUNE ||
+                enchantment == Enchantments.EFFICIENCY) {
+            return false;
+        }
+
+        return super.canApplyAtEnchantingTable(stack, enchantment);
     }
 
     @Override
     public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
-        if (net.minecraft.enchantment.EnchantmentHelper.getEnchantments(book).containsKey(net.minecraft.init.Enchantments.MENDING)) {
-            return false;
+        Map<Enchantment, Integer> enchantments = net.minecraft.enchantment.EnchantmentHelper.getEnchantments(book);
+
+        for (net.minecraft.enchantment.Enchantment enchantment : enchantments.keySet()) {
+            if (enchantment == Enchantments.MENDING ||
+                    enchantment == Enchantments.SILK_TOUCH ||
+                    enchantment == Enchantments.FORTUNE ||
+                    enchantment == Enchantments.EFFICIENCY) {
+                return false;
+            }
         }
+
         return super.isBookEnchantable(stack, book);
     }
 
