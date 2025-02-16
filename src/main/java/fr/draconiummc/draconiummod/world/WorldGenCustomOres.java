@@ -1,7 +1,5 @@
 package fr.draconiummc.draconiummod.world;
 
-import java.util.Random;
-
 import fr.draconiummc.draconiummod.init.BlockInit;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.pattern.BlockMatcher;
@@ -13,6 +11,8 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
+
+import java.util.Random;
 
 public class WorldGenCustomOres implements IWorldGenerator {
     private WorldGenerator pyronite_ore, draconium_ore, noxium_ore, random_ore;
@@ -26,6 +26,9 @@ public class WorldGenCustomOres implements IWorldGenerator {
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+        if (!ModConfig.enableOreGeneration) {
+            return;
+        }
         switch (world.provider.getDimension()) {
             case 0:
                 // Générer pyronite près des lacs de lave (dans, au-dessus ou autour)
@@ -38,42 +41,81 @@ public class WorldGenCustomOres implements IWorldGenerator {
     }
 
     private void runGenerator(WorldGenerator gen, World world, Random rand, int chunkX, int chunkZ, int chance, int minHeight, int maxHeight, boolean isNearLava) {
-        if (minHeight > maxHeight || minHeight < 0 || maxHeight > 256)
-            throw new IllegalArgumentException("Minerai généré hors limites");
-
-        int heightDiff = maxHeight - minHeight + 1;
-
-        for (int i = 0; i < chance; i++) {
-            int x = chunkX * 16 + rand.nextInt(16);
-            int y = minHeight + rand.nextInt(heightDiff);
-            int z = chunkZ * 16 + rand.nextInt(16);
-
-            // Si on veut générer près d'un lac de lave
-            if (isNearLava) {
-                BlockPos pos = new BlockPos(x, y, z);
-                if (isNearLava(world, pos)) {
-                    // Générer le minerai dans, au-dessus ou autour de la lave
-                    generateNearLava(world, rand, pos, gen);
-                }
-            } else {
-                gen.generate(world, rand, new BlockPos(x, y, z));
+        if (world == null) {
+            System.err.println("[CRASH] Le monde est null, impossible de générer !");
+            return;
+        }
+        try {
+            if (minHeight > maxHeight || minHeight < 0 || maxHeight > 256) {
+                System.err.println("[ERREUR] Minerai généré hors des limites ! minHeight: " + minHeight + ", maxHeight: " + maxHeight);
+                return;
             }
+
+            int heightDiff = maxHeight - minHeight + 1;
+            int maxAttempts = chance * 5; // Empêcher une boucle infinie
+
+            int generated = 0;
+            int attempts = 0;
+
+            while (generated < chance && attempts < maxAttempts) {
+                int x = chunkX * 16 + rand.nextInt(16);
+                int y = minHeight + rand.nextInt(heightDiff);
+                int z = chunkZ * 16 + rand.nextInt(16);
+                BlockPos pos = new BlockPos(x, y, z);
+
+                // Vérifie que le chunk est chargé
+                if (!world.isBlockLoaded(pos)) {
+                    System.out.println("[DEBUG] Chunk non chargé, tentative ignorée.");
+                    attempts++;
+                    continue;
+                }
+
+                // Si on veut générer près d'un lac de lave
+                if (isNearLava) {
+                    if(isLiquid(world.getBlockState(pos).getBlock())) {
+                        if (isNearLava(world, pos)) {
+                        System.out.println("[INFO] Génération de minerai près de la lave en " + pos);
+                        generateNearLava(world, rand, pos, gen);
+                        generated++;
+                    }} else {
+                        System.out.println("[DEBUG] Pas de lave trouvée près de " + pos);
+                    }
+                } else {
+                    // Vérifie que le bloc à la position est valide avant de générer
+                    if (world.getBlockState(pos).getBlock() == Blocks.STONE || world.getBlockState(pos).getBlock() == Blocks.AIR) {
+                        gen.generate(world, rand, pos);
+                        generated++;
+                    } else {
+                        System.out.println("[DEBUG] Position invalide pour génération à " + pos);
+                    }
+                }
+                attempts++;
+            }
+
+            System.out.println("[INFO] Génération terminée : " + generated + " minerais générés sur " + chance);
+        } catch (Exception e) {
+            System.err.println("[CRASH] Erreur dans runGenerator: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
     private boolean isNearLava(World world, BlockPos pos) {
-        // Vérifie si la position est près d'un lac de lave (environ 5 blocs de distance)
-        for (int dx = -5; dx <= 5; dx++) {
-            for (int dy = -5; dy <= 5; dy++) {
-                for (int dz = -5; dz <= 5; dz++) {
+        // Vérifie si la position est proche d'un liquide (lave ou eau) dans un rayon de 3 blocs.
+        for (int dx = -3; dx <= 3; dx++) {
+            for (int dy = -3; dy <= 3; dy++) {
+                for (int dz = -3; dz <= 3; dz++) {
                     BlockPos checkPos = pos.add(dx, dy, dz);
-                    if (world.getBlockState(checkPos).getBlock() == Blocks.LAVA) {
+                    if (isLiquid(world.getBlockState(checkPos).getBlock())) {
                         return true;
                     }
                 }
             }
         }
         return false;
+    }
+
+    private boolean isLiquid(Block block) {
+        return block == Blocks.LAVA || block == Blocks.FLOWING_LAVA || block == Blocks.WATER || block == Blocks.FLOWING_WATER;
     }
 
     private void generateNearLava(World world, Random rand, BlockPos pos, WorldGenerator gen) {
@@ -87,9 +129,13 @@ public class WorldGenCustomOres implements IWorldGenerator {
 
         // Choisit une position valide parmi les options
         for (BlockPos generatePos : possiblePositions) {
-            if (world.getBlockState(generatePos).getBlock() == Blocks.STONE || world.getBlockState(generatePos).getBlock() == Blocks.LAVA) {
+            // Assurez-vous que le minerai ne se génère pas sur de la lave
+            if (world.getBlockState(generatePos).getBlock() == Blocks.STONE || world.getBlockState(generatePos).getBlock() == Blocks.AIR) {
                 gen.generate(world, rand, generatePos);
+                System.out.println("[INFO] Minerai généré à " + generatePos);
                 break;
+            } else {
+                System.out.println("[DEBUG] Lave détectée, tentative ignorée à " + generatePos);
             }
         }
     }

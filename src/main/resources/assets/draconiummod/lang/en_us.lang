@@ -1,2 +1,70 @@
-item.draconium_ingot.name= Draconium Ingot
-tile.draconium_block.name= Draconium Block
+# ========================
+# LINGOTS
+# ========================
+item.draconium_ingot.name=Lingot de Draconium
+item.pyronite_ingot.name=Lingot de Pyronite
+item.noxium_gem.name=Gemme de Noxium
+
+# ========================
+# Blocs
+# ========================
+tile.draconium_block.name=Bloc de Draconium
+tile.pyronite_block.name=Bloc de Pyronite
+
+# ========================
+# Blocs Spéciaux
+# ========================
+tile.cave_block.name=Cave Block
+tile.elevator_block.name=Bloc d'Ascenseur
+
+# ========================
+# Minerais
+# ========================
+tile.draconium_ore.name=Minerai de Draconium
+tile.pyronite_ore.name=Minerai de Pyronite
+tile.noxium_ore.name=Minerai de Noxium
+
+# ========================
+# Armure en Pyronite
+# ========================
+item.pyronite_helmet.name=Casque en Pyronite
+item.pyronite_chestplate.name=Plastron en Pyronite
+item.pyronite_leggings.name=Jambières en Pyronite
+item.pyronite_boots.name=Bottes en Pyronite
+
+# ========================
+# Armure en Draconium
+# ========================
+item.draconium_helmet.name=Casque en Draconium
+item.draconium_chestplate.name=Plastron en Draconium
+item.draconium_leggings.name=Jambières en Draconium
+item.draconium_boots.name=Bottes en Draconium
+
+# ========================
+# Outils en Pyronite
+# ========================
+item.pyronite_axe.name=Hache en Pyronite
+item.pyronite_hammer.name=Marteau en Pyronite
+item.pyronite_pickaxe.name=Pioche en Pyronite
+item.pyronite_shovel.name=Pelle en Pyronite
+item.pyronite_sword.name=Épée en Pyronite
+
+# ========================
+# Outils en Draconium
+# ========================
+item.draconium_axe.name=Hache en Draconium
+item.draconium_hammer.name=Marteau en Draconium
+item.draconium_pickaxe.name=Pioche en Draconium
+item.draconium_shovel.name=Pelle en Draconium
+item.draconium_sword.name=Épée en Draconium
+
+# ========================
+# CreativeTabs
+# ========================
+itemGroup.draconiummod_armor=Armures du DraconiumMod
+itemGroup.draconiummod_blocks=Blocs du DraconiumMod
+itemGroup.draconiummod_food=Nourriture du DraconiumMod
+itemGroup.draconiummod_misc=Objets divers du DraconiumMod
+itemGroup.draconiummod_resources=Ressources du DraconiumMod
+itemGroup.draconiummod_tools=Outils du DraconiumModh
+itemGroup.draconiummod_weapons=Armes du DraconiumMod

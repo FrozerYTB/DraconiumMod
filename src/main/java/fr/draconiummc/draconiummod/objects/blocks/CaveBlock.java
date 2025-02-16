@@ -10,8 +10,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class CaveBlock extends Block implements IHasModel
 {
@@ -32,8 +30,8 @@ public class CaveBlock extends Block implements IHasModel
         DraconiumMod.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
     }
 
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockRenderLayer() {
+    @Override
+    public BlockRenderLayer getBlockLayer() {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
 }

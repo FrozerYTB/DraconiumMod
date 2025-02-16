@@ -1,25 +1,12 @@
 package fr.draconiummc.draconiummod.objects.tools;
 
-import java.util.Collection;
-import java.util.Optional;
-import java.util.UUID;
-
-
-import com.google.common.collect.Multimap;
-import com.ibm.icu.impl.BOCU;
-
 import fr.draconiummc.draconiummod.DraconiumMod;
 import fr.draconiummc.draconiummod.init.CreativeTabInit;
 import fr.draconiummc.draconiummod.init.ItemInit;
 import fr.draconiummc.draconiummod.utils.IHasModel;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;

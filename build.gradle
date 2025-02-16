@@ -9,13 +9,9 @@ buildscript {
 }
 
 apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'eclipse'
+apply plugin: 'idea'
 apply plugin: 'maven-publish'
 apply plugin: 'idea'
-
-idea { module { inheritOutputDirs = true } }
-
-sourceSets.main.resources { srcDir 'src/main/resources' }
 
 version = '1.0'
 group = 'fr.draconiummc.draconiummod'
@@ -69,3 +65,7 @@ publishing {
         }
     }
 }
+
+idea { module { inheritOutputDirs = true } }
+
+sourceSets.main.resources { srcDir 'src/main/resources' }

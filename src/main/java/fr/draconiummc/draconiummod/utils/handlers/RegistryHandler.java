@@ -7,8 +7,8 @@ import fr.draconiummc.draconiummod.world.WorldGenCustomOres;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -17,6 +17,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @Mod.EventBusSubscriber
 public class RegistryHandler {
@@ -31,6 +33,7 @@ public class RegistryHandler {
         event.getRegistry().registerAll(BlockInit.BLOCKS.toArray(new Block[0]));
     }
 
+    @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public static void onModelRegister(ModelRegistryEvent event) {
         for (Item item : ItemInit.ITEMS) {
@@ -50,19 +53,16 @@ public class RegistryHandler {
     public static void onPlayerTick(TickEvent.PlayerTickEvent e)
     {
         EntityPlayer player = e.player;
-        if(e.player.world.getBlockState(new BlockPos(player.posX, player.posY - 1, player.posZ)).getBlock() == BlockInit.ELEVATOR)
+        BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(MathHelper.floor(player.posX), MathHelper.floor(player.posY - 1), MathHelper.floor(player.posZ));
+        if(e.player.world.getBlockState(pos).getBlock() == BlockInit.ELEVATOR)
         {
             if(player.isSneaking())
             {
                 for(int i = (int)(player.posY - 2); i > 0; i--)
                 {
-                    if(e.player.world.getBlockState(new BlockPos(player.posX, i, player.posZ)).getBlock() == BlockInit.ELEVATOR)
-                    {
-                        BlockPos pos = new BlockPos(player.posX, i, player.posZ);
-
-                        player.setPosition(player.posX, pos.getY() + 1, player.posZ);
-
-                    }
+                    pos.setPos(player.posX, i, player.posZ);
+                    if(e.player.world.getBlockState(pos).getBlock() == BlockInit.ELEVATOR)
+                        player.setPosition(player.posX, i + 1, player.posZ);
                 }
             }
         }

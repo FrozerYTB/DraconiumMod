@@ -2,6 +2,7 @@ package fr.draconiummc.draconiummod.objects.blocks;
 
 import fr.draconiummc.draconiummod.init.BlockInit;
 import fr.draconiummc.draconiummod.init.CreativeTabInit;
+import fr.draconiummc.draconiummod.init.ItemInit;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -9,6 +10,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Enchantments;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -26,21 +28,28 @@ public class BlockRandomOre extends Block {
         this.setRegistryName("random_ore");
         this.setHardness(3.0F);
         this.setResistance(5.0F);
+
+        BlockInit.BLOCKS.add(this);
+        ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
     }
 
     @Override
     public void harvestBlock(World world, net.minecraft.entity.player.EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te, ItemStack stack) {
         if (!world.isRemote) {
+            boolean hasSilkTouch = EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, stack) > 0;
+            if (hasSilkTouch) {
+                spawnAsEntity(world, pos, new ItemStack(this));
+            } else {
 
-            int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack);
-            Random rand = new Random();
-            ItemStack drop = getRandomOre(rand, fortune);
+                int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack);
+                Random rand = new Random();
+                ItemStack drop = getRandomOre(rand, fortune);
 
-            if (!drop.isEmpty()) {
-                spawnAsEntity(world, pos, drop);
+                if (!drop.isEmpty()) {
+                    spawnAsEntity(world, pos, drop);
+                }
             }
         }
-        super.harvestBlock(world, player, pos, state, te, stack);
     }
 
     /**
@@ -71,7 +80,7 @@ public class BlockRandomOre extends Block {
                 10.0,  // DIAMANT
                 25.0,  // LAPIS-LAZULI
                 25.0,  // REDSTONE
-                5.0,   // PYRONITE
+                4.0,   // PYRONITE
                 1.5,   // DRACONIUM
                 0.7    // NOXIUM
         };

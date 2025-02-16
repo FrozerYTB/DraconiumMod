@@ -1,9 +1,8 @@
 package fr.draconiummc.draconiummod.init;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Item;
-import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 
 public class CreativeTabInit {
 
@@ -50,7 +49,7 @@ public class CreativeTabInit {
     public static final CreativeTabs DRACONIUM_TOOLS = new CreativeTabs("draconiummod_tools") {
         @Override
         public ItemStack getTabIconItem() {
-            return new ItemStack(ItemInit.DRACONIUM_INGOT); // Remplace par un vrai outil
+            return new ItemStack(ItemInit.DRACONIUM_PICKAXE); // Remplace par un vrai outil
         }
     };
 
@@ -58,7 +57,7 @@ public class CreativeTabInit {
     public static final CreativeTabs DRACONIUM_WEAPONS = new CreativeTabs("draconiummod_weapons") {
         @Override
         public ItemStack getTabIconItem() {
-            return new ItemStack(ItemInit.DRACONIUM_INGOT); // Remplace par une vraie arme
+            return new ItemStack(ItemInit.DRACONIUM_SWORD); // Remplace par une vraie arme
         }
     };
 }

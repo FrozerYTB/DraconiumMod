@@ -1,15 +1,15 @@
 package fr.draconiummc.draconiummod.init;
 
-import fr.draconiummc.draconiummod.objects.items.ItemRessources;
 import fr.draconiummc.draconiummod.objects.armor.ArmorBase;
+import fr.draconiummc.draconiummod.objects.items.ItemRessources;
 import fr.draconiummc.draconiummod.objects.tools.*;
 import fr.draconiummc.draconiummod.utils.Reference;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.item.Item.ToolMaterial;
-import net.minecraftforge.common.util.EnumHelper;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraftforge.common.util.EnumHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +18,9 @@ public class ItemInit {
     public static final List<Item> ITEMS = new ArrayList<>();
 
     // 📌 Déclaration des matériaux d'outils et des armures
-    public static final ToolMaterial DRACONIUM_HAMMER_TOOLS = EnumHelper.addToolMaterial("draconium_hammer", 5, 2500, 5.0f, 1.0f, 5);
-    public static final ToolMaterial PYRONITE_TOOLS = EnumHelper.addToolMaterial("pyronite_tools", 4, 1750, 12.0f, 6.0f, 10);
-    public static final ToolMaterial DRACONIUM_TOOLS = EnumHelper.addToolMaterial("draconium_tools", 5, 2500, 14.0f, 6.0f, 14);
+    public static final ToolMaterial DRACONIUM_HAMMER_TOOLS = EnumHelper.addToolMaterial("draconium_hammer", 5, 2500, 1.0f, 1.0f, 5);
+    public static final ToolMaterial PYRONITE_TOOLS = EnumHelper.addToolMaterial("pyronite_tools", 4, 1750, 6.7f, 6.0f, 10);
+    public static final ToolMaterial DRACONIUM_TOOLS = EnumHelper.addToolMaterial("draconium_tools", 5, 2500, 9.0f, 6.0f, 14);
     public static final ArmorMaterial PYRONITE_ARMOR = EnumHelper.addArmorMaterial("armor_tuto", Reference.MOD_ID + ":draconiummod", 75, new int[] {4, 7, 9, 4}, 18, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 1.0f);
     public static final ArmorMaterial DRACONIUM_ARMOR = EnumHelper.addArmorMaterial("armor_tuto", Reference.MOD_ID + ":draconiummod", 75, new int[] {5, 9, 11, 5}, 18, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0f);
 

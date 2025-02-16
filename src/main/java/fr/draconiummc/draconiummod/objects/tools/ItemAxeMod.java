@@ -1,9 +1,6 @@
 package fr.draconiummc.draconiummod.objects.tools;
 
-import java.util.Set;
-
 import com.google.common.collect.Sets;
-
 import fr.draconiummc.draconiummod.DraconiumMod;
 import fr.draconiummc.draconiummod.init.CreativeTabInit;
 import fr.draconiummc.draconiummod.init.ItemInit;
@@ -14,7 +11,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Item.ToolMaterial;
+
+import java.util.Set;
 
 public class ItemAxeMod extends ItemAxe implements IHasModel
 {
@@ -42,7 +40,7 @@ public class ItemAxeMod extends ItemAxe implements IHasModel
         return EFFECTIVE_ON.contains(state.getBlock()) ? this.efficiency : 1.0F;
     }
 
-    @Override
+   @Override
     public void registerModels()
     {
         DraconiumMod.proxy.registerItemRenderer(this, 0, "inventory");
