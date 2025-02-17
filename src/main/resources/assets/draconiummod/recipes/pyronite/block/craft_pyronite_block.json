@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "draconiummod:pyronite_ingot"
+    }
+  },
+  "result": {
+    "item": "draconiummod:pyronite_block",
+    "count": 1
+  }
+}

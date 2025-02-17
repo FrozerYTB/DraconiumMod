@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EWE",
+    "WEW",
+    "EWE"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:wool",
+      "data": 13
+    },
+    "E": {
+      "item": "minecraft:enderpearl"
+    }
+  },
+  "result": {
+    "item": "draconiummod:elevator_block",
+    "count": 2
+  }
+}
