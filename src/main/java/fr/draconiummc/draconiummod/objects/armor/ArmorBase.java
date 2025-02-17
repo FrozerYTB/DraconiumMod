@@ -37,7 +37,7 @@ public class ArmorBase extends ItemArmor implements IHasModel {
             boolean hasLeggings = isWearing(player, ItemInit.DRACONIUM_LEGGINGS);
             boolean hasBoots = isWearing(player, ItemInit.DRACONIUM_BOOTS);
 
-            applyOrRemoveEffect(player, MobEffects.NIGHT_VISION, hasHelmet, 450); 
+            applyOrRemoveEffect(player, MobEffects.NIGHT_VISION, hasHelmet, 450);
             applyOrRemoveEffect(player, MobEffects.RESISTANCE, hasChestplate, 40); // 2s
             applyOrRemoveEffect(player, MobEffects.HASTE, hasLeggings, 40); // 2s
             applyOrRemoveEffect(player, MobEffects.SPEED, hasBoots, 40); // 2s
