@@ -108,6 +108,7 @@ public class RegistryHandler {
 
     public static void initRegistries()
     {
+        RecipesHandler.registerRecipes();
     }
 
     public static void postInitRegistries()

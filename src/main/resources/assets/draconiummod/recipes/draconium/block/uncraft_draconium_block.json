@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "pattern": [
+    "",
+    "#",
+    ""
+  ],
+  "key": {
+    "#": {
+      "item": "draconiummod:draconium_block"
+    }
+  },
+  "result": {
+    "item": "draconiummod:draconium_ingot",
+    "count": 9
+  }
+}

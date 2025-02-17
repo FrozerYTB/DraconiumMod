@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "G#G",
+    "GGG"
+  ],
+  "key": {
+    "#": {
+      "item": "draconiummod:noxium_gem"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    }
+  },
+  "result": {
+    "item": "draconiummod:cave_block",
+    "count": 1
+  }
+}
