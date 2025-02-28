@@ -1,14 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "WEW",
-    "EWE",
-    "WEW"
+    "IEI",
+    "EIE",
+    "IEI"
   ],
   "key": {
-    "W": {
-      "item": "minecraft:wool",
-      "data": 12
+    "I": {
+      "item": "minecraft:iron_block",
     },
     "E": {
       "item": "minecraft:enderpearl"
