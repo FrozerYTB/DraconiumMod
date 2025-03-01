@@ -26,7 +26,7 @@ public class BlockRandomOre extends Block {
         this.setCreativeTab(CreativeTabInit.DRACONIUM_RESOURCES);
         this.setUnlocalizedName("random_ore");
         this.setRegistryName("random_ore");
-        this.setHardness(3.0F);
+        this.setHardness(5.0F);
         this.setResistance(5.0F);
 
         BlockInit.BLOCKS.add(this);

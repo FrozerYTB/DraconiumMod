@@ -25,9 +25,6 @@ public class BlockRessources extends Block implements IHasModel
         this.setCreativeTab(CreativeTabInit.DRACONIUM_RESOURCES);
         this.setHarvestLevel(tool, haversLevel);
 
-
-
-
         BlockInit.BLOCKS.add(this);
         ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
     }

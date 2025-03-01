@@ -1,12 +1,12 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "EIE",
-    "EIE",
-    "EIE"
+    "#E#",
+    "E#E",
+    "#E#"
   ],
   "key": {
-    "I": {
+    "#": {
       "item": "minecraft:iron_block"
     },
     "E": {

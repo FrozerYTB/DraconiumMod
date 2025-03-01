@@ -18,7 +18,7 @@ public class CaveBlock extends Block implements IHasModel
         super(material);
         setUnlocalizedName(name);
         setRegistryName(name);
-        setHardness(5.0f);
+        setHardness(8.0f);
         setCreativeTab(CreativeTabInit.DRACONIUM_BLOCKS);
         BlockInit.BLOCKS.add(this);
         ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
