@@ -1,4 +1,5 @@
 {
+  "group": "draconiummod",
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "E#E",
@@ -6,15 +7,16 @@
     "E#E"
   ],
   "key": {
-    "I": {
-      "item": "minecraft:iron_block"
+    "#": {
+      "item": "minecraft:wool",
+      "data": 32767
     },
     "E": {
-      "item": "minecraft:enderpearl"
+      "item": "minecraft:ender_pearl"
     }
   },
   "result": {
-    "item": "draconiummod:draconium_hammer",
-    "count": 1
+    "item": "draconiummod:elevator",
+    "count": 2
   }
 }

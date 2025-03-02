@@ -2,8 +2,6 @@ package fr.draconiummc.draconiummod.utils.handlers;
 
 import fr.draconiummc.draconiummod.init.BlockInit;
 import fr.draconiummc.draconiummod.init.ItemInit;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 

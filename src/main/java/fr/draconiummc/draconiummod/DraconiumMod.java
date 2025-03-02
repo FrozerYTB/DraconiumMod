@@ -33,6 +33,7 @@ public class DraconiumMod
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
+
         RegistryHandler.preInitRegistries(event);
     }
 
@@ -46,6 +47,7 @@ public class DraconiumMod
     @Mod.EventHandler
     public void postInit(FMLPreInitializationEvent event)
     {
+
         RegistryHandler.postInitRegistries();
     }
 
