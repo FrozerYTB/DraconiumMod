@@ -4,10 +4,13 @@ import fr.draconiummc.draconiummod.init.CreativeTabInit;
 import fr.draconiummc.draconiummod.proxy.CommonProxy;
 import fr.draconiummc.draconiummod.utils.Reference;
 import fr.draconiummc.draconiummod.utils.handlers.RegistryHandler;
+import fr.draconiummc.draconiummod.world.ModConfig;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+
+import java.io.File;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.NAME, version = Reference.VERSION, acceptedMinecraftVersions = Reference.ACCEPTED_VERSIONS)
 public class DraconiumMod
@@ -35,6 +38,7 @@ public class DraconiumMod
     {
 
         RegistryHandler.preInitRegistries(event);
+        ModConfig.loadConfig(new File(event.getModConfigurationDirectory(), "draconiummod.cfg"));
     }
 
     @Mod.EventHandler

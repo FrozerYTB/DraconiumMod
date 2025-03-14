@@ -11,7 +11,7 @@ public class ModConfig {
         Configuration config = new Configuration(configFile);
         config.load();
 
-        enableOreGeneration = config.getBoolean("enableOreGeneration", "generation", true,
+        enableOreGeneration = config.getBoolean("enableOreGeneration", "generation", false,
                 "Définir sur false pour désactiver la génération des minerais moddés.");
 
         config.save();
