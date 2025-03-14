@@ -1,7 +1,7 @@
 package fr.draconiummc.draconiummod.init;
 
 import fr.draconiummc.draconiummod.objects.armor.ArmorBase;
-import fr.draconiummc.draconiummod.objects.items.ItemRessources;
+import fr.draconiummc.draconiummod.objects.items.*;
 import fr.draconiummc.draconiummod.objects.tools.*;
 import fr.draconiummc.draconiummod.utils.Reference;
 import net.minecraft.init.SoundEvents;
@@ -56,4 +56,8 @@ public class ItemInit {
     // 🛠️ Marteau spécial
     public static final Item DRACONIUM_HAMMER = new ItemHammer("draconium_hammer", DRACONIUM_HAMMER_TOOLS);
     public static final Item PYRONITE_HAMMER = new ItemHammer("pyronite_hammer", PYRONITE_HAMMER_TOOLS);
+
+    //Artefacts
+    public static final Item GRENADE = new ItemGrenade("grenade");
+
 }

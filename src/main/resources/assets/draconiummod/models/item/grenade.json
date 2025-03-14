@@ -1,0 +1,8 @@
+{
+  "parent": "item/generated",
+  "textures":
+  {
+    "layer0": "draconiummod:items/grenade"
+  },
+  "model": "draconiummod:models/entity/grenade"
+}

@@ -15,7 +15,7 @@ tile.pyronite_block.name=Bloc de Pyronite
 # Blocs Spéciaux
 # ========================
 tile.cave_block.name=Cave Block
-tile.elevator_block.name=Bloc d'Ascenseur
+tile.elevator.name=Bloc d'Ascenseur
 
 # ========================
 # Minerais
@@ -66,5 +66,10 @@ itemGroup.draconiummod_blocks=Blocs du DraconiumMod
 itemGroup.draconiummod_food=Nourriture du DraconiumMod
 itemGroup.draconiummod_misc=Objets divers du DraconiumMod
 itemGroup.draconiummod_resources=Ressources du DraconiumMod
-itemGroup.draconiummod_tools=Outils du DraconiumModh
+itemGroup.draconiummod_tools=Outils du DraconiumMod
 itemGroup.draconiummod_weapons=Armes du DraconiumMod
+
+# ========================
+# Items Spéciaux
+# ========================
+item.grenade.name= Grenade

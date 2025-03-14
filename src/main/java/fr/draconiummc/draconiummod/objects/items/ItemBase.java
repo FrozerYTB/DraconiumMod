@@ -10,9 +10,9 @@ public class ItemBase extends Item implements IHasModel
 {
     public ItemBase(String name)
     {
-        setUnlocalizedName(name);
-        setRegistryName(name);
-        setCreativeTab(CreativeTabInit.DRACONIUM_MISC);
+        this.setUnlocalizedName(name);
+        this.setRegistryName(name);
+        this.setCreativeTab(CreativeTabInit.DRACONIUM_MISC);
 
         ItemInit.ITEMS.add(this);
     }

@@ -6,11 +6,9 @@ import fr.draconiummc.draconiummod.utils.Reference;
 import fr.draconiummc.draconiummod.utils.handlers.RegistryHandler;
 import fr.draconiummc.draconiummod.world.ModConfig;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 import java.io.File;
 

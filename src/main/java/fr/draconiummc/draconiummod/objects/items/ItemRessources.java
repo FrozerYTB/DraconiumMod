@@ -10,9 +10,9 @@ public class ItemRessources extends Item implements IHasModel
 {
     public ItemRessources(String name)
     {
-        setUnlocalizedName(name);
-        setRegistryName(name);
-        setCreativeTab(CreativeTabInit.DRACONIUM_RESOURCES);
+        this.setUnlocalizedName(name);
+        this.setRegistryName(name);
+        this.setCreativeTab(CreativeTabInit.DRACONIUM_RESOURCES);
 
         ItemInit.ITEMS.add(this);
     }
