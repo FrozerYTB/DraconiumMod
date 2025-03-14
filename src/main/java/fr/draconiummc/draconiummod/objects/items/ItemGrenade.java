@@ -37,18 +37,17 @@ public class ItemGrenade extends Item
             itemstack.shrink(1);
         }
 
-        // Joue le son de lancement de la grenade
+
         worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 
         if (!worldIn.isRemote)
         {
-            // Créer l'entité grenade et la lancer
             EntityGrenade entityGrenade = new EntityGrenade(worldIn, playerIn);
-            entityGrenade.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F); // Appliquer la vitesse de lancement
-            worldIn.spawnEntity(entityGrenade); // Ajouter l'entité au monde
+            entityGrenade.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
+            worldIn.spawnEntity(entityGrenade);
         }
 
-        playerIn.addStat(StatList.getObjectUseStats(this)); // Statistique de l'utilisation de l'objet
-        return new ActionResult<>(EnumActionResult.SUCCESS, itemstack); // Retour succès
+        playerIn.addStat(StatList.getObjectUseStats(this));
+        return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
     }
 }
