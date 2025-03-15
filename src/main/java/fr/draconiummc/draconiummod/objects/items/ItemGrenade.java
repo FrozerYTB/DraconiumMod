@@ -4,6 +4,7 @@ import fr.draconiummc.draconiummod.DraconiumMod;
 import fr.draconiummc.draconiummod.entity.EntityGrenade;
 import fr.draconiummc.draconiummod.init.CreativeTabInit;
 import fr.draconiummc.draconiummod.init.ItemInit;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -15,6 +16,9 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.stats.StatList;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemGrenade extends Item
 {
@@ -25,6 +29,11 @@ public class ItemGrenade extends Item
         this.setCreativeTab(CreativeTabInit.DRACONIUM_MISC);
 
         ItemInit.ITEMS.add(this);
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void registerModels() {
+        DraconiumMod.proxy.registerItemRenderer(this, 0, "inventory");
     }
 
     @Override

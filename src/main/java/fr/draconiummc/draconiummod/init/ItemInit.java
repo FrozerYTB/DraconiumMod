@@ -20,8 +20,8 @@ public class ItemInit {
     // 📌 Déclaration des matériaux d'outils et des armures
     public static final ToolMaterial DRACONIUM_HAMMER_TOOLS = EnumHelper.addToolMaterial("draconium_hammer", 5, 2750, 0.8f, 1.0f, 5);
     public static final ToolMaterial PYRONITE_HAMMER_TOOLS = EnumHelper.addToolMaterial("pyroniye_hammer", 4, 1980, 0.5f, 1.0f, 5);
-    public static final ToolMaterial PYRONITE_TOOLS = EnumHelper.addToolMaterial("pyronite_tools", 4, 1750, 6.7f, 6.0f, 10);
-    public static final ToolMaterial DRACONIUM_TOOLS = EnumHelper.addToolMaterial("draconium_tools", 5, 2500, 9.0f, 6.0f, 14);
+    public static final ToolMaterial PYRONITE_TOOLS = EnumHelper.addToolMaterial("pyronite_tools", 4, 1750, 6.7f, 5.0f, 10);
+    public static final ToolMaterial DRACONIUM_TOOLS = EnumHelper.addToolMaterial("draconium_tools", 5, 2500, 8.7f, 6.0f, 13);
     public static final ArmorMaterial PYRONITE_ARMOR = EnumHelper.addArmorMaterial("pyronite_armor", Reference.MOD_ID + ":pyronite_armor", 75, new int[] {4, 7, 9, 4}, 18, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 1.0f);
     public static final ArmorMaterial DRACONIUM_ARMOR = EnumHelper.addArmorMaterial("draconium_armor", Reference.MOD_ID + ":draconium_armor", 90, new int[] {5, 9, 11, 5}, 18, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0f);
 
@@ -31,10 +31,10 @@ public class ItemInit {
     public static final Item NOXIUM_GEM = new ItemRessources("noxium_gem");
 
     // ⚒️ Outils
-    public static final ItemSword PYRONITE_SWORD = new ItemSwordMod("pyronite_sword", DRACONIUM_TOOLS);
-    public static final ItemPickaxe PYRONITE_PICKAXE = new ItemPickaxeMod("pyronite_pickaxe", DRACONIUM_TOOLS);
-    public static final ItemSpade PYRONITE_SHOVEL = new ItemShovelMod("pyronite_shovel", DRACONIUM_TOOLS);
-    public static final ItemAxe PYRONITE_AXE = new ItemAxeMod("pyronite_axe", DRACONIUM_TOOLS);
+    public static final ItemSword PYRONITE_SWORD = new ItemSwordMod("pyronite_sword", PYRONITE_TOOLS);
+    public static final ItemPickaxe PYRONITE_PICKAXE = new ItemPickaxeMod("pyronite_pickaxe", PYRONITE_TOOLS);
+    public static final ItemSpade PYRONITE_SHOVEL = new ItemShovelMod("pyronite_shovel", PYRONITE_TOOLS);
+    public static final ItemAxe PYRONITE_AXE = new ItemAxeMod("pyronite_axe", PYRONITE_TOOLS);
 
     public static final ItemSword DRACONIUM_SWORD = new ItemSwordMod("draconium_sword", DRACONIUM_TOOLS);
     public static final ItemPickaxe DRACONIUM_PICKAXE = new ItemPickaxeMod("draconium_pickaxe", DRACONIUM_TOOLS);
