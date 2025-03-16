@@ -45,7 +45,7 @@ public class EntityGrenade extends EntityThrowable
             this.world.newExplosion(this, this.posX, this.posY, this.posZ, 4.0F, false, true);
 
 
-            int radius = 5;
+            int radius = 4;
             for (int x = -radius; x <= radius; x++) {
                 for (int y = -radius; y <= radius; y++) {
                     for (int z = -radius; z <= radius; z++) {
@@ -56,7 +56,7 @@ public class EntityGrenade extends EntityThrowable
 
                         if (block == Blocks.OBSIDIAN) {
 
-                            if (this.rand.nextFloat() < 0.6f) {
+                            if (this.rand.nextFloat() < 0.5f) {
                                 world.setBlockToAir(pos);
                             }
                         }

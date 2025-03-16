@@ -1,5 +1,6 @@
 package fr.draconiummc.draconiummod.proxy;
 
+import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.item.Item;
 
 public class CommonProxy {
@@ -14,4 +15,9 @@ public class CommonProxy {
     public void registerRenderers() {
 
     }
+
+    public RenderItem getItemRenderer() {
+        return null;
+    }
+
 }

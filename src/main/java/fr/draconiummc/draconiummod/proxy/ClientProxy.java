@@ -4,6 +4,8 @@ import fr.draconiummc.draconiummod.init.ItemInit;
 import fr.draconiummc.draconiummod.objects.items.ItemGrenade;
 import fr.draconiummc.draconiummod.entity.EntityGrenade;
 import fr.draconiummc.draconiummod.entity.render.RenderGrenade;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
@@ -28,5 +30,10 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void registerRenderers() {
         RenderingRegistry.registerEntityRenderingHandler(EntityGrenade.class, RenderGrenade::new);
+    }
+
+    @Override
+    public RenderItem getItemRenderer() {
+        return Minecraft.getMinecraft().getRenderItem();
     }
 }

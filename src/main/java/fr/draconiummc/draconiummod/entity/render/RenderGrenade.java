@@ -13,7 +13,7 @@ import net.minecraft.util.ResourceLocation;
 @SideOnly(Side.CLIENT)
 public class RenderGrenade extends RenderSnowball<EntityGrenade> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation("draconiummod:textures/entity/grenade.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation("draconiummod:textures/item/grenade.png");
 
     public RenderGrenade(RenderManager renderManager) {
         super(renderManager, Items.SNOWBALL, Minecraft.getMinecraft().getRenderItem());

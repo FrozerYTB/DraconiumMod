@@ -23,7 +23,7 @@ tile.elevator.name=Bloc d'Ascenseur
 tile.draconium_ore.name=Minerai de Draconium
 tile.pyronite_ore.name=Minerai de Pyronite
 tile.noxium_ore.name=Minerai de Noxium
-
+tile.random_ore.name=Minerai Random
 # ========================
 # Armure en Pyronite
 # ========================

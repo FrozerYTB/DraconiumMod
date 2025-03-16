@@ -4,6 +4,7 @@ import fr.draconiummc.draconiummod.init.CreativeTabInit;
 import fr.draconiummc.draconiummod.proxy.CommonProxy;
 import fr.draconiummc.draconiummod.utils.Reference;
 import fr.draconiummc.draconiummod.utils.handlers.RegistryHandler;
+import fr.draconiummc.draconiummod.utils.handlers.RenderHandler;
 import fr.draconiummc.draconiummod.world.ModConfig;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -38,6 +39,7 @@ public class DraconiumMod
     {
 
         RegistryHandler.preInitRegistries(event);
+        RenderHandler.registerEntityRenders();
         ModConfig.loadConfig(new File(event.getModConfigurationDirectory(), "draconiummod.cfg"));
     }
 

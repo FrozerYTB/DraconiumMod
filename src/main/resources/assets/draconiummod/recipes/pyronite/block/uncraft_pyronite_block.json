@@ -1,9 +1,8 @@
 {
   "type": "minecraft:crafting_shapeless",
   "pattern": [
-    "",
-    "#",
-    ""
+
+    "#"
   ],
   "key": {
     "#": {
