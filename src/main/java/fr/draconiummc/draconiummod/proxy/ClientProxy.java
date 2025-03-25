@@ -21,14 +21,14 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void registerModels() {
         for (Item item : ItemInit.ITEMS) {
-            if (item instanceof ItemGrenade) {
-                ((ItemGrenade) item).registerModels();
-            }
+            registerItemRenderer(item, 0, "inventory");
         }
+
     }
 
     @Override
-    public void registerRenderers() {
+    public void registerEntityRenderers() {
+        RenderGrenade.register();
         RenderingRegistry.registerEntityRenderingHandler(EntityGrenade.class, RenderGrenade::new);
     }
 

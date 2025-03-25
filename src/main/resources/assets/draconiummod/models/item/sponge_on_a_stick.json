@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "draconiummod:items/sponge_on_a_stick"
+  }
+}

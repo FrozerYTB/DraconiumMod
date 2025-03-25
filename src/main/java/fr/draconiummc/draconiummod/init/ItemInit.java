@@ -59,5 +59,7 @@ public class ItemInit {
 
     //Artefacts
     public static final Item GRENADE = new ItemGrenade("grenade");
+    public static final Item SPONGE_ON_A_STICK = new SpongeOnAStick("sponge_on_a_stick");
+
 
 }

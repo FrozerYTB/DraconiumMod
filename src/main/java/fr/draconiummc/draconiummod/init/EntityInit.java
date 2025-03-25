@@ -8,6 +8,6 @@ import fr.draconiummc.draconiummod.DraconiumMod;
 
 public class EntityInit {
     public static void registerEntities() {
-        EntityRegistry.registerModEntity(new ResourceLocation(Reference.MOD_ID, "grenade"), EntityGrenade.class, "Grenade", 120, DraconiumMod.instance, 64, 1, true);
+        EntityRegistry.registerModEntity(new ResourceLocation("draconiummod", "grenade"), EntityGrenade.class, "Grenade", 1, DraconiumMod.instance, 64, 10, true);
     }
 }

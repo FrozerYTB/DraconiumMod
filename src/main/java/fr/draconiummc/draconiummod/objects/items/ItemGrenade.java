@@ -4,6 +4,7 @@ import fr.draconiummc.draconiummod.DraconiumMod;
 import fr.draconiummc.draconiummod.entity.EntityGrenade;
 import fr.draconiummc.draconiummod.init.CreativeTabInit;
 import fr.draconiummc.draconiummod.init.ItemInit;
+import fr.draconiummc.draconiummod.utils.Reference;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,15 +21,12 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemGrenade extends Item
+public class ItemGrenade extends ItemBase
 {
     public ItemGrenade(String name)
     {
-        this.setUnlocalizedName(name);
-        this.setRegistryName(name);
-        this.setCreativeTab(CreativeTabInit.DRACONIUM_MISC);
+        super(name);
 
-        ItemInit.ITEMS.add(this);
     }
 
     @SideOnly(Side.CLIENT)
