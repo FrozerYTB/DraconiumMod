@@ -4,6 +4,7 @@ import fr.draconiummc.draconiummod.init.CreativeTabInit;
 import fr.draconiummc.draconiummod.init.ItemInit;
 import fr.draconiummc.draconiummod.proxy.CommonProxy;
 import fr.draconiummc.draconiummod.utils.Reference;
+import fr.draconiummc.draconiummod.utils.handlers.RecipesHandler;
 import fr.draconiummc.draconiummod.utils.handlers.RegistryHandler;
 import fr.draconiummc.draconiummod.utils.handlers.RenderHandler;
 import fr.draconiummc.draconiummod.world.ModConfig;
@@ -12,6 +13,8 @@ import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -21,12 +24,6 @@ import java.io.File;
 public class DraconiumMod
 {
 
-    @SubscribeEvent
-    public static void registerModels(ModelRegistryEvent event) {
-        for(Item item : ItemInit.ITEMS) {
-            DraconiumMod.proxy.registerItemRenderer(item, 0, "inventory");
-        }
-    }
     @Mod.Instance
     public static DraconiumMod instance;
 
@@ -51,19 +48,22 @@ public class DraconiumMod
     {
         RegistryHandler.preInitRegistries(event);
 
-        proxy.registerEntityRenderers();  // Ceci appelle ton ClientProxy côté client.
+        proxy.registerModels();
+
+        proxy.registerEntityRenderers();
 
         ModConfig.loadConfig(new File(event.getModConfigurationDirectory(), "draconiummod.cfg"));
     }
 
     @Mod.EventHandler
-    public void Init(FMLPreInitializationEvent event)
+    public void Init(FMLInitializationEvent event)
     {
-        RegistryHandler.initRegistries();
+        System.out.println("[DraconiumMod] Initialisation en cours...");
+        RecipesHandler.registerRecipes();
     }
 
     @Mod.EventHandler
-    public void postInit(FMLPreInitializationEvent event)
+    public void postInit(FMLPostInitializationEvent event)
     {
 
         RegistryHandler.postInitRegistries();
