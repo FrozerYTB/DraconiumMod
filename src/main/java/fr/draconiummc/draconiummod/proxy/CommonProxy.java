@@ -3,6 +3,7 @@ package fr.draconiummc.draconiummod.proxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.item.Item;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
 public class CommonProxy {
 
@@ -14,4 +15,6 @@ public class CommonProxy {
         return Minecraft.getMinecraft().getRenderItem();
     }
 
+    protected void onClientSetup(FMLInitializationEvent event) {
+    }
 }

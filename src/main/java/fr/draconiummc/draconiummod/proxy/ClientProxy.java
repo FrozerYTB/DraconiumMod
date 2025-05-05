@@ -1,7 +1,6 @@
 package fr.draconiummc.draconiummod.proxy;
 
 import fr.draconiummc.draconiummod.init.ItemInit;
-import fr.draconiummc.draconiummod.objects.items.ItemGrenade;
 import fr.draconiummc.draconiummod.entity.EntityGrenade;
 import fr.draconiummc.draconiummod.entity.render.RenderGrenade;
 import net.minecraft.client.Minecraft;

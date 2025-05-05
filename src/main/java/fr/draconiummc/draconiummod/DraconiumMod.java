@@ -1,22 +1,28 @@
 package fr.draconiummc.draconiummod;
 
+import fr.draconiummc.draconiummod.client.gui.MainMenuGui;
 import fr.draconiummc.draconiummod.init.CreativeTabInit;
-import fr.draconiummc.draconiummod.init.ItemInit;
 import fr.draconiummc.draconiummod.proxy.CommonProxy;
 import fr.draconiummc.draconiummod.utils.Reference;
 import fr.draconiummc.draconiummod.utils.handlers.RecipesHandler;
 import fr.draconiummc.draconiummod.utils.handlers.RegistryHandler;
-import fr.draconiummc.draconiummod.utils.handlers.RenderHandler;
+import fr.draconiummc.draconiummod.utils.handlers.TickHandler;
 import fr.draconiummc.draconiummod.world.ModConfig;
-import net.minecraft.item.Item;
-import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiMainMenu;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.io.File;
 
@@ -59,6 +65,7 @@ public class DraconiumMod
     public void Init(FMLInitializationEvent event)
     {
         System.out.println("[DraconiumMod] Initialisation en cours...");
+        MinecraftForge.EVENT_BUS.register(new TickHandler());
         RecipesHandler.registerRecipes();
     }
 
@@ -69,5 +76,14 @@ public class DraconiumMod
         RegistryHandler.postInitRegistries();
     }
 
+    @Mod.EventHandler
+    public void serverLoad(FMLServerStartingEvent event) {
+        // Actions côté serveur si nécessaire
+    }
 
+    @Mod.EventHandler
+    public void init(FMLInitializationEvent event) {
+        // Initialisation du mod
+    }
 }
+

@@ -11,13 +11,10 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 
-public class BlockRessources extends Block implements IHasModel
-
-{
+public class BlockRessources extends Block implements IHasModel {
 
 
-    public BlockRessources(String name, Material material, String tool, int haversLevel)
-    {
+    public BlockRessources(String name, Material material, String tool, int haversLevel) {
         super(material);
         this.setUnlocalizedName(name);
         this.setRegistryName(name);
@@ -30,11 +27,9 @@ public class BlockRessources extends Block implements IHasModel
     }
 
     @Override
-    public void registerModels()
-    {
+    public void registerModels() {
         DraconiumMod.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
     }
-
-
-
 }
+
+

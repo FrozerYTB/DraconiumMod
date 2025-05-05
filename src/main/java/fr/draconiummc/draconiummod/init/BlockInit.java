@@ -1,9 +1,6 @@
 package fr.draconiummc.draconiummod.init;
 
-import fr.draconiummc.draconiummod.objects.blocks.BlockRandomOre;
-import fr.draconiummc.draconiummod.objects.blocks.BlockRessources;
-import fr.draconiummc.draconiummod.objects.blocks.CaveBlock;
-import fr.draconiummc.draconiummod.objects.blocks.Elevator;
+import fr.draconiummc.draconiummod.objects.blocks.*;
 import fr.draconiummc.draconiummod.objects.tools.ItemPickaxeMod;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

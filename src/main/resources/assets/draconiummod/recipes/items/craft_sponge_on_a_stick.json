@@ -7,14 +7,14 @@
   ],
   "key": {
     "#": {
-      "item": "minecraft:sponge"
+      "item": "draconiummod:draconium_sponge"
     },
     "S": {
       "item": "minecraft:stick"
     }
   },
   "result": {
-    "item": "draconiummod:draconium_shovel",
+    "item": "draconiummod:sponge_on_a_stick",
     "count": 1
   }
 }

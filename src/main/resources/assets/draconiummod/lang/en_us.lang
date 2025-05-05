@@ -1,6 +1,8 @@
 # ========================
 # LINGOTS
 # ========================
+# LINGOTS
+# ========================
 item.draconium_ingot.name=Lingot de Draconium
 item.pyronite_ingot.name=Lingot de Pyronite
 item.noxium_gem.name=Gemme de Noxium
@@ -16,6 +18,8 @@ tile.pyronite_block.name=Bloc de Pyronite
 # ========================
 tile.cave_block.name=Cave Block
 tile.elevator.name=Bloc d'Ascenseur
+tile.draconium_sponge.name=Éponge en Draconium
+
 
 # ========================
 # Minerais
