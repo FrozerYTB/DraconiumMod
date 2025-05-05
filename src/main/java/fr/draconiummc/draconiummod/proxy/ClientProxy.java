@@ -1,14 +1,21 @@
 package fr.draconiummc.draconiummod.proxy;
 
+import fr.draconiummc.draconiummod.client.ClientGuiHandler;
+import fr.draconiummc.draconiummod.client.gui.MainMenuGui;
 import fr.draconiummc.draconiummod.init.ItemInit;
 import fr.draconiummc.draconiummod.entity.EntityGrenade;
 import fr.draconiummc.draconiummod.entity.render.RenderGrenade;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ClientProxy extends CommonProxy {
 
@@ -22,7 +29,6 @@ public class ClientProxy extends CommonProxy {
         for (Item item : ItemInit.ITEMS) {
             registerItemRenderer(item, 0, "inventory");
         }
-
     }
 
     @Override
@@ -35,4 +41,18 @@ public class ClientProxy extends CommonProxy {
     public RenderItem getItemRenderer() {
         return Minecraft.getMinecraft().getRenderItem();
     }
-}
+
+
+    @SideOnly(Side.CLIENT)
+    public class TickHandler {
+        private boolean shown = false;
+
+        @SubscribeEvent
+        public void onClientTick(TickEvent.ClientTickEvent event) {
+            if (event.phase == TickEvent.Phase.END && !shown && Minecraft.getMinecraft().player != null) {
+                shown = true;
+                ClientGuiHandler.openMainMenu();
+            }
+        }
+    }
+    }

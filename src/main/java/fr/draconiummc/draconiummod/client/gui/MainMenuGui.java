@@ -9,7 +9,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.client.GuiModList;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+@SideOnly(Side.CLIENT)
 public class MainMenuGui extends GuiScreen {
     private static final String ADMIN_USERNAME = "FrozerYTB";
     private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation("custommainmenu", "textures/gui/background.png");
