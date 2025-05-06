@@ -11,7 +11,9 @@ import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -55,4 +57,10 @@ public class ClientProxy extends CommonProxy {
             }
         }
     }
+
+    @Override
+    public void init(FMLInitializationEvent event) {
+        MinecraftForge.EVENT_BUS.register(new TickHandler());
     }
+
+}

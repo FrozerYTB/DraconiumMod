@@ -17,4 +17,8 @@ public class CommonProxy {
 
     protected void onClientSetup(FMLInitializationEvent event) {
     }
+
+    public void init(FMLInitializationEvent event) {
+        // Rien ici côté serveur
+    }
 }

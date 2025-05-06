@@ -56,9 +56,10 @@ public class DraconiumMod
     public void Init(FMLInitializationEvent event)
     {
         System.out.println("[DraconiumMod] Initialisation en cours...");
-        MinecraftForge.EVENT_BUS.register(new TickHandler());
+        proxy.init(event);
         RecipesHandler.registerRecipes();
     }
+
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event)
