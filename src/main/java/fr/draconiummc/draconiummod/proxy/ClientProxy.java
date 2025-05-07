@@ -59,6 +59,7 @@ public class ClientProxy extends CommonProxy {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void init(FMLInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(new TickHandler());
     }
