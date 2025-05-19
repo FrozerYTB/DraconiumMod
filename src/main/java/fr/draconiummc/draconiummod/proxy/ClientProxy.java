@@ -1,6 +1,7 @@
 package fr.draconiummc.draconiummod.proxy;
 
 import fr.draconiummc.draconiummod.client.ClientGuiHandler;
+import fr.draconiummc.draconiummod.client.events.ClientEventHandler;
 import fr.draconiummc.draconiummod.client.gui.MainMenuGui;
 import fr.draconiummc.draconiummod.init.ItemInit;
 import fr.draconiummc.draconiummod.entity.EntityGrenade;
@@ -14,6 +15,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -56,6 +58,13 @@ public class ClientProxy extends CommonProxy {
                 ClientGuiHandler.openMainMenu();
             }
         }
+    }
+
+    @Override
+    public void preInit(FMLPreInitializationEvent event) {
+        super.preInit(event);
+        MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
+        MinecraftForge.EVENT_BUS.register(new ClientGuiHandler());
     }
 
     @Override

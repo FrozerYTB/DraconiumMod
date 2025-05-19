@@ -27,7 +27,7 @@ public class MainMenuGui extends GuiScreen {
 
         // Ajout des boutons centrés
         this.buttonList.add(new GuiButton(0, centerX - 100, startY + 15 , 200, 20, "Jouer en solo (NE MARCHE PAS)"));
-        this.buttonList.get(0).enabled = false;
+        this.buttonList.get(0).enabled = true;
         this.buttonList.add(new GuiButton(1, centerX - 100, startY + 40, 200, 20, "Jouer à DraconiumMC !"));
         this.buttonList.add(new GuiButton(2, centerX - 100, startY + 65, 200, 20, "Voir les mods de DraconiumMC"));
         this.buttonList.add(new GuiButton(3, centerX - 100, startY + 90, 98, 20, "Options"));
