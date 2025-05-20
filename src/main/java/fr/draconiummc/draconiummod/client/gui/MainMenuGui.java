@@ -94,11 +94,6 @@ public class MainMenuGui extends GuiScreen {
         if (!soloButton.enabled && isMouseOverButton(soloButton, mouseX, mouseY)) {
             this.drawHoveringText("🛈 Le mode solo est désactivé sur DraconiumMC.", mouseX, mouseY);
         }
-//        for (GuiButton button : this.buttonList) {
-//            if (button.id == 0) { // Si c'est le bouton "Jouer en solo"
-//                drawCenteredString(this.fontRenderer, button.displayString, button.x + button.width / 2, button.y + 6,0xFFFFFF);
-//            }
-//        }
     }
 
     private boolean isMouseOverButton(GuiButton button, int mouseX, int mouseY) {
