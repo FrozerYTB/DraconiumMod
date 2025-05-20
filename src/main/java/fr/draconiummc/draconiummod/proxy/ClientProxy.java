@@ -1,16 +1,15 @@
 package fr.draconiummc.draconiummod.proxy;
 
-import fr.draconiummc.draconiummod.client.ClientGuiHandler;
-import fr.draconiummc.draconiummod.client.events.ClientEventHandler;
 import fr.draconiummc.draconiummod.client.gui.MainMenuGui;
 import fr.draconiummc.draconiummod.init.ItemInit;
 import fr.draconiummc.draconiummod.entity.EntityGrenade;
 import fr.draconiummc.draconiummod.entity.render.RenderGrenade;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -20,7 +19,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
+@SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
 
     @Override
@@ -47,7 +46,6 @@ public class ClientProxy extends CommonProxy {
     }
 
 
-    @SideOnly(Side.CLIENT)
     public class TickHandler {
         private boolean shown = false;
 
@@ -55,7 +53,6 @@ public class ClientProxy extends CommonProxy {
         public void onClientTick(TickEvent.ClientTickEvent event) {
             if (event.phase == TickEvent.Phase.END && !shown && Minecraft.getMinecraft().player != null) {
                 shown = true;
-                ClientGuiHandler.openMainMenu();
             }
         }
     }
@@ -63,14 +60,19 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void preInit(FMLPreInitializationEvent event) {
         super.preInit(event);
-        MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
-        MinecraftForge.EVENT_BUS.register(new ClientGuiHandler());
     }
 
-    @Override
-    @SideOnly(Side.CLIENT)
     public void init(FMLInitializationEvent event) {
-        MinecraftForge.EVENT_BUS.register(new TickHandler());
+        MinecraftForge.EVENT_BUS.register(this);
+    }
+
+    @SubscribeEvent
+    public void onOpenGui(GuiOpenEvent event)
+    {
+        if(event.getGui() != null && event.getGui().getClass() == GuiMainMenu.class)
+        {
+            event.setGui(new MainMenuGui());
+        }
     }
 
 }

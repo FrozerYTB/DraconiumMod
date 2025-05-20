@@ -9,10 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.client.GuiModList;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SideOnly(Side.CLIENT)
 public class MainMenuGui extends GuiScreen {
     private static final String ADMIN_USERNAME = "FrozerYTB";
     private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation("custommainmenu", "textures/gui/background.png");
@@ -27,7 +24,7 @@ public class MainMenuGui extends GuiScreen {
 
         // Ajout des boutons centrés
         this.buttonList.add(new GuiButton(0, centerX - 100, startY + 15 , 200, 20, "Jouer en solo (NE MARCHE PAS)"));
-        this.buttonList.get(0).enabled = true;
+        this.buttonList.get(0).enabled = false;
         this.buttonList.add(new GuiButton(1, centerX - 100, startY + 40, 200, 20, "Jouer à DraconiumMC !"));
         this.buttonList.add(new GuiButton(2, centerX - 100, startY + 65, 200, 20, "Voir les mods de DraconiumMC"));
         this.buttonList.add(new GuiButton(3, centerX - 100, startY + 90, 98, 20, "Options"));
@@ -92,10 +89,20 @@ public class MainMenuGui extends GuiScreen {
 
         // Dessiner les boutons et autres éléments
         super.drawScreen(mouseX, mouseY, partialTicks);
-        for (GuiButton button : this.buttonList) {
-            if (button.id == 0) { // Si c'est le bouton "Jouer en solo"
-                drawCenteredString(this.fontRenderer, button.displayString, button.x + button.width / 2, button.y + 6, 0xAAAAAA);
-            }
+        GuiButton soloButton = this.buttonList.get(0); // bouton id 0 = Jouer en solo
+
+        if (!soloButton.enabled && isMouseOverButton(soloButton, mouseX, mouseY)) {
+            this.drawHoveringText("🛈 Le mode solo est désactivé sur DraconiumMC.", mouseX, mouseY);
         }
+//        for (GuiButton button : this.buttonList) {
+//            if (button.id == 0) { // Si c'est le bouton "Jouer en solo"
+//                drawCenteredString(this.fontRenderer, button.displayString, button.x + button.width / 2, button.y + 6,0xFFFFFF);
+//            }
+//        }
+    }
+
+    private boolean isMouseOverButton(GuiButton button, int mouseX, int mouseY) {
+        return mouseX >= button.x && mouseX <= button.x + button.width &&
+                mouseY >= button.y && mouseY <= button.y + button.height;
     }
 }

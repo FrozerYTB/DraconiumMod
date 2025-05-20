@@ -1,5 +1,6 @@
 package fr.draconiummc.draconiummod;
 
+import fr.draconiummc.draconiummod.client.gui.MainMenuGui;
 import fr.draconiummc.draconiummod.init.CreativeTabInit;
 import fr.draconiummc.draconiummod.proxy.CommonProxy;
 import fr.draconiummc.draconiummod.utils.Reference;
@@ -64,7 +65,6 @@ public class DraconiumMod
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
-
         RegistryHandler.postInitRegistries();
     }
 

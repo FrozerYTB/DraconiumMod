@@ -74,11 +74,11 @@ public class WorldGenCustomOres implements IWorldGenerator {
                 if (isNearLava) {
                     if(isLiquid(world.getBlockState(pos).getBlock())) {
                         if (isNearLava(world, pos)) {
-                        System.out.println("[INFO] Génération de minerai près de la lave en " + pos);
+//                        System.out.println("[INFO] Génération de minerai près de la lave en " + pos);
                         generateNearLava(world, rand, pos, gen);
                         generated++;
                     }} else {
-                        System.out.println("[DEBUG] Pas de lave trouvée près de " + pos);
+//                        System.out.println("[DEBUG] Pas de lave trouvée près de " + pos);
                     }
                 } else {
                     // Vérifie que le bloc à la position est valide avant de générer
