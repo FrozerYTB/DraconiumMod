@@ -99,19 +99,4 @@ public class RegistryHandler {
             }
         }
     }
-
-
-    public static void preInitRegistries(FMLPreInitializationEvent event)
-    {
-        GameRegistry.registerWorldGenerator(new WorldGenCustomOres(), 0);
-    }
-
-    public static void initRegistries()
-    {
-
-    }
-
-    public static void postInitRegistries()
-    {
-    }
 }

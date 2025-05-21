@@ -1,142 +1,130 @@
 package fr.draconiummc.draconiummod.world;
 
 import fr.draconiummc.draconiummod.init.BlockInit;
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-import java.util.Random;
+import java.util.*;
 
 public class WorldGenCustomOres implements IWorldGenerator {
-    private WorldGenerator pyronite_ore, draconium_ore, noxium_ore, random_ore;
+
+    private final List<OreGenParams> overworldOres = new ArrayList<>();
+    private final List<OreGenParams> netherOres    = new ArrayList<>();
+    private final List<OreGenParams> endOres       = new ArrayList<>();
 
     public WorldGenCustomOres() {
-        pyronite_ore = new WorldGenMinable(BlockInit.PYRONITE_ORE.getDefaultState(), 5, BlockMatcher.forBlock(Blocks.STONE));
-        draconium_ore = new WorldGenMinable(BlockInit.DRACONIUM_ORE.getDefaultState(), 4, BlockMatcher.forBlock(Blocks.STONE));
-        noxium_ore = new WorldGenMinable(BlockInit.NOXIUM_ORE.getDefaultState(), 2, BlockMatcher.forBlock(Blocks.STONE));
-        random_ore = new WorldGenMinable(BlockInit.RANDOM_ORE.getDefaultState(), 1, BlockMatcher.forBlock(Blocks.STONE));
+        // Overworld ores
+        overworldOres.add(new OreGenParams("Pyronite", 3, 15, 1, 6, 8, BlockInit.PYRONITE_ORE.getDefaultState(), Blocks.STONE));
+        overworldOres.add(new OreGenParams("Draconium", 3, 10, 1, 5, 5, BlockInit.DRACONIUM_ORE.getDefaultState(), Blocks.STONE));
+        overworldOres.add(new OreGenParams("Noxium", 3, 8, 1, 2, 4, BlockInit.NOXIUM_ORE.getDefaultState(), Blocks.STONE));
+        overworldOres.add(new OreGenParams("RandomOre", 3, 30, 1, 3, 6, BlockInit.RANDOM_ORE.getDefaultState(), Blocks.STONE));
+
+        // Example Nether ore (non activé pour l’instant)
+        // netherOres.add(new OreGenParams("Infernium", 10, 120, 3, 8, 10, BlockInit.INFERNIUM_ORE.getDefaultState(), Blocks.NETHERRACK));
+
+        // Example End ore (non activé)
+        // endOres.add(new OreGenParams("Enderite", 0, 80, 2, 5, 6, BlockInit.ENDERITE_ORE.getDefaultState(), Blocks.END_STONE));
     }
 
     @Override
-    public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-        if (!ModConfig.enableOreGeneration) {
-            return;
-        }
-        switch (world.provider.getDimension()) {
-            case 0:
-                // Générer pyronite près des lacs de lave (dans, au-dessus ou autour)
-                runGenerator(pyronite_ore, world, random, chunkX, chunkZ, 13, 0, 15, true); // Pyronite proche des lacs de lave
-                runGenerator(draconium_ore, world, random, chunkX, chunkZ, 8, 0, 10, false);
-                runGenerator(noxium_ore, world, random, chunkX, chunkZ, 2, 0, 5, false);
-                runGenerator(random_ore, world, random, chunkX, chunkZ, 3, 0, 5, false);
+    public void generate(Random rand, int chunkX, int chunkZ,
+                         World world, IChunkGenerator chunkGen, IChunkProvider chunkProvider) {
+
+        int dim = world.provider.getDimension();
+
+        switch (dim) {
+            case 0: // Overworld
+                overworldOres.forEach(ore -> runGenerator(ore, world, rand, chunkX, chunkZ));
+                break;
+            case -1: // Nether
+                netherOres.forEach(ore -> runGenerator(ore, world, rand, chunkX, chunkZ));
+                break;
+            case 1: // End
+                endOres.forEach(ore -> runGenerator(ore, world, rand, chunkX, chunkZ));
+                break;
+            default:
                 break;
         }
     }
 
-    private void runGenerator(WorldGenerator gen, World world, Random rand, int chunkX, int chunkZ, int chance, int minHeight, int maxHeight, boolean isNearLava) {
-        if (world == null) {
-            System.err.println("[CRASH] Le monde est null, impossible de générer !");
+    private void runGenerator(OreGenParams ore, World world, Random rand, int chunkX, int chunkZ) {
+
+        if (ore.oreBlock == null) {
+            System.err.println("[ERREUR] Bloc null pour " + ore.name);
             return;
         }
-        try {
-            if (minHeight > maxHeight || minHeight < 0 || maxHeight > 256) {
-                System.err.println("[ERREUR] Minerai généré hors des limites ! minHeight: " + minHeight + ", maxHeight: " + maxHeight);
-                return;
-            }
+        if (ore.minHeight > ore.maxHeight || ore.minHeight < 0 || ore.maxHeight > 256) {
+            System.err.println("[ERREUR] Hauteurs invalides pour " + ore.name);
+            return;
+        }
 
-            int heightDiff = maxHeight - minHeight + 1;
-            int maxAttempts = chance * 5; // Empêcher une boucle infinie
+        int heightDiff = ore.maxHeight - ore.minHeight + 1;
 
-            int generated = 0;
-            int attempts = 0;
+        for (int v = 0; v < ore.veinCount; v++) {
+            int x = chunkX * 16 + rand.nextInt(16);
+            int y = ore.minHeight + rand.nextInt(heightDiff);
+            int z = chunkZ * 16 + rand.nextInt(16);
+            BlockPos pos = new BlockPos(x, y, z);
 
-            while (generated < chance && attempts < maxAttempts) {
-                int x = chunkX * 16 + rand.nextInt(16);
-                int y = minHeight + rand.nextInt(heightDiff);
-                int z = chunkZ * 16 + rand.nextInt(16);
-                BlockPos pos = new BlockPos(x, y, z);
+            // Optionnel : filtrer par biome
+            // Biome biome = world.getBiome(pos);
+            // if (!ore.allowedBiomes.isEmpty() && !ore.allowedBiomes.contains(biome.getRegistryName().toString())) {
+            //     continue;
+            // }
 
-                // Vérifie que le chunk est chargé
-                if (!world.isBlockLoaded(pos)) {
-                    System.out.println("[DEBUG] Chunk non chargé, tentative ignorée.");
-                    attempts++;
-                    continue;
-                }
+            int veinSize = ore.minVeinSize + rand.nextInt(ore.maxVeinSize - ore.minVeinSize + 1);
+            WorldGenerator gen = new WorldGenMinable(ore.oreBlock, veinSize, BlockMatcher.forBlock(ore.targetBlock));
 
-                // Si on veut générer près d'un lac de lave
-                if (isNearLava) {
-                    if(isLiquid(world.getBlockState(pos).getBlock())) {
-                        if (isNearLava(world, pos)) {
-//                        System.out.println("[INFO] Génération de minerai près de la lave en " + pos);
-                        generateNearLava(world, rand, pos, gen);
-                        generated++;
-                    }} else {
-//                        System.out.println("[DEBUG] Pas de lave trouvée près de " + pos);
-                    }
-                } else {
-                    // Vérifie que le bloc à la position est valide avant de générer
-                    if (world.getBlockState(pos).getBlock() == Blocks.STONE || world.getBlockState(pos).getBlock() == Blocks.AIR) {
-                        gen.generate(world, rand, pos);
-                        generated++;
-                    } else {
-                        System.out.println("[DEBUG] Position invalide pour génération à " + pos);
-                    }
-                }
-                attempts++;
-            }
+            gen.generate(world, rand, pos);
 
-            System.out.println("[INFO] Génération terminée : " + generated + " minerais générés sur " + chance);
-        } catch (Exception e) {
-            System.err.println("[CRASH] Erreur dans runGenerator: " + e.getMessage());
-            e.printStackTrace();
+            // Comptage rapide autour du point d’origine
+            int placed = 0;
+            for (int dx = -4; dx <= 4; dx++)
+                for (int dy = -4; dy <= 4; dy++)
+                    for (int dz = -4; dz <= 4; dz++)
+                        if (world.getBlockState(pos.add(dx, dy, dz)).getBlock() == ore.oreBlock.getBlock())
+                            placed++;
+
+            double ratio = placed / (double) veinSize;
+            System.out.println("[GEN] " + ore.name +
+                    " | Veine demandée : " + veinSize +
+                    " | Blocs placés : " + placed +
+                    " | Ratio : " + String.format("%.2f", ratio) +
+                    " | Pos : " + pos + " (chunk " + chunkX + "," + chunkZ + ")");
         }
     }
 
-    private boolean isNearLava(World world, BlockPos pos) {
-        // Vérifie si la position est proche d'un liquide (lave ou eau) dans un rayon de 3 blocs.
-        for (int dx = -3; dx <= 3; dx++) {
-            for (int dy = -3; dy <= 3; dy++) {
-                for (int dz = -3; dz <= 3; dz++) {
-                    BlockPos checkPos = pos.add(dx, dy, dz);
-                    if (isLiquid(world.getBlockState(checkPos).getBlock())) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
+    /** Contient tous les paramètres d’un minerai. */
+    private static class OreGenParams {
+        String name;
+        int minHeight, maxHeight;
+        int minVeinSize, maxVeinSize;
+        int veinCount;
+        IBlockState oreBlock;
+        net.minecraft.block.Block targetBlock;
+        List<String> allowedBiomes = new ArrayList<>(); // Pour les filtres biome si besoin
 
-    private boolean isLiquid(Block block) {
-        return block == Blocks.LAVA || block == Blocks.FLOWING_LAVA || block == Blocks.WATER || block == Blocks.FLOWING_WATER;
-    }
+        OreGenParams(String name, int minH, int maxH,
+                     int minSize, int maxSize, int count,
+                     IBlockState state, net.minecraft.block.Block targetBlock) {
 
-    private void generateNearLava(World world, Random rand, BlockPos pos, WorldGenerator gen) {
-        // Vérifie plusieurs niveaux autour du lac de lave pour placer le minerai
-        BlockPos[] possiblePositions = {
-                pos, // Générer directement dans la lave
-                pos.up(), // Générer juste au-dessus de la lave
-                pos.down(), // Générer juste en dessous de la lave
-                pos.add(rand.nextInt(3) - 1, 0, rand.nextInt(3) - 1) // Générer autour, dans un rayon de 1 bloc
-        };
-
-        // Choisit une position valide parmi les options
-        for (BlockPos generatePos : possiblePositions) {
-            // Assurez-vous que le minerai ne se génère pas sur de la lave
-            if (world.getBlockState(generatePos).getBlock() == Blocks.STONE || world.getBlockState(generatePos).getBlock() == Blocks.AIR) {
-                gen.generate(world, rand, generatePos);
-                System.out.println("[INFO] Minerai généré à " + generatePos);
-                break;
-            } else {
-                System.out.println("[DEBUG] Lave détectée, tentative ignorée à " + generatePos);
-            }
+            this.name = name;
+            this.minHeight = minH;
+            this.maxHeight = maxH;
+            this.minVeinSize = minSize;
+            this.maxVeinSize = maxSize;
+            this.veinCount = count;
+            this.oreBlock = state;
+            this.targetBlock = targetBlock;
         }
     }
 }
