@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.fml.client.GuiModList;
 
 public class MainMenuGui extends GuiScreen {
@@ -71,8 +72,21 @@ public class MainMenuGui extends GuiScreen {
     }
 
     private void connectToServer(String ip, int port) {
-        ServerData serverData = new ServerData("DraconiumMC", ip + ":" + port, false);
-        Minecraft.getMinecraft().displayGuiScreen(new GuiConnecting(new GuiMainMenu(), Minecraft.getMinecraft(), serverData));
+        try {
+            ServerData serverData = new ServerData("DraconiumMC", ip + ":" + port, false);
+            Minecraft.getMinecraft().displayGuiScreen(new GuiConnecting(this, Minecraft.getMinecraft(), serverData));
+        } catch (Exception e) {
+            // Log l'erreur dans la console
+            System.err.println("[DraconiumMC] Erreur lors de la tentative de connexion : " + e.getMessage());
+            e.printStackTrace();
+
+            // Affiche un écran d'erreur personnalisé
+            Minecraft.getMinecraft().displayGuiScreen(new GuiDisconnected(
+                    this,
+                    "Connexion échouée",
+                    new TextComponentString("Impossible de se connecter au serveur DraconiumMC.\nErreur : " + e.getMessage())
+            ));
+        }
     }
 
     @Override
