@@ -1,9 +1,15 @@
 {
-  "parent": "draconiummod:draconium/craft_draconium_armor/root",
+  "parent": "draconiummod:recipes/root",
   "display": {
-    "icon": { "item": "draconiummod:draconium_chestplate" },
-    "title": { "text": "Chevalier du Draconium" },
-    "description": { "text": "Forge l'armure complète en Draconium." },
+    "icon": {
+      "item": "draconiummod:draconium_chestplate"
+    },
+    "title": {
+      "text": "Chevalier du Draconium"
+    },
+    "description": {
+      "text": "Forge l’armure complète en Draconium."
+    },
     "frame": "challenge",
     "show_toast": true,
     "announce_to_chat": true,

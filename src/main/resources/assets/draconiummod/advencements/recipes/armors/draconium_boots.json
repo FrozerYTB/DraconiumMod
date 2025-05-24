@@ -1,0 +1,33 @@
+{
+  "parent": "draconiummod:recipes/root",
+  "display": {
+    "icon": { "item": "draconiummod:draconium_boots" },
+    "title": { "text": "Bottes Draconique" },
+    "description": { "text": "Forge des bottes en Draconium" },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "has_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "draconiummod:draconium/armor/craft_draconium_boots"
+      }
+    },
+    "has_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "draconiummod:draconium_boots"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    ["has_recipe", "has_boots"]
+  ]
+}
