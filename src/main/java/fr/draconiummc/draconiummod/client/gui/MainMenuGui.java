@@ -43,6 +43,7 @@ public class MainMenuGui extends GuiScreen {
         switch (button.id) {
             case 0:
                 // Le bouton est désactivé, donc cette action ne sera pas exécutée
+
                 break;
             case 1:
                 // Action pour jouer en multijoueur

@@ -56,7 +56,7 @@ public class DraconiumMod
         System.out.println("[DraconiumMod] Initialisation en cours...");
         proxy.init(event);
         RecipesHandler.registerRecipes();
-        GameRegistry.registerWorldGenerator(new WorldGenCustomOres(), 0);
+        GameRegistry.registerWorldGenerator(new WorldGenCustomOres(), 10);
     }
 
 

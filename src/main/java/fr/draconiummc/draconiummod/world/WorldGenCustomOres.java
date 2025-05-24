@@ -24,48 +24,30 @@ public class WorldGenCustomOres implements IWorldGenerator {
     public WorldGenCustomOres() {
         // Overworld ores
         overworldOres.add(new OreGenParams("Pyronite", 3, 15, 1, 6, 8, BlockInit.PYRONITE_ORE.getDefaultState(), Blocks.STONE));
-        overworldOres.add(new OreGenParams("Draconium", 3, 10, 1, 5, 5, BlockInit.DRACONIUM_ORE.getDefaultState(), Blocks.STONE));
-        overworldOres.add(new OreGenParams("Noxium", 3, 8, 1, 2, 4, BlockInit.NOXIUM_ORE.getDefaultState(), Blocks.STONE));
-        overworldOres.add(new OreGenParams("RandomOre", 3, 30, 1, 3, 6, BlockInit.RANDOM_ORE.getDefaultState(), Blocks.STONE));
-
-        // Example Nether ore (non activé pour l’instant)
-        // netherOres.add(new OreGenParams("Infernium", 10, 120, 3, 8, 10, BlockInit.INFERNIUM_ORE.getDefaultState(), Blocks.NETHERRACK));
-
-        // Example End ore (non activé)
-        // endOres.add(new OreGenParams("Enderite", 0, 80, 2, 5, 6, BlockInit.ENDERITE_ORE.getDefaultState(), Blocks.END_STONE));
+        overworldOres.add(new OreGenParams("Draconium", 3, 10, 1, 4, 5, BlockInit.DRACONIUM_ORE.getDefaultState(), Blocks.STONE));
+        overworldOres.add(new OreGenParams("Noxium", 3, 7, 1, 2, 4, BlockInit.NOXIUM_ORE.getDefaultState(), Blocks.STONE));
+        overworldOres.add(new OreGenParams("RandomOre", 3, 30, 1, 1, 6, BlockInit.RANDOM_ORE.getDefaultState(), Blocks.STONE));
     }
 
     @Override
-    public void generate(Random rand, int chunkX, int chunkZ,
-                         World world, IChunkGenerator chunkGen, IChunkProvider chunkProvider) {
+    public void generate(Random rand, int chunkX, int chunkZ, World world, IChunkGenerator chunkGen, IChunkProvider chunkProvider) {
+        if (!ModConfig.enableOreGeneration) {
+            return;
+        }
+        // Ne générez que dans l'Overworld pour éviter les problèmes
+        if (world.provider.getDimension() != 0) return;
 
-        int dim = world.provider.getDimension();
+        // Ajoutez un délai aléatoire pour étaler la génération
+        if (rand.nextInt(3) != 0) return;
 
-        switch (dim) {
-            case 0: // Overworld
-                overworldOres.forEach(ore -> runGenerator(ore, world, rand, chunkX, chunkZ));
-                break;
-            case -1: // Nether
-                netherOres.forEach(ore -> runGenerator(ore, world, rand, chunkX, chunkZ));
-                break;
-            case 1: // End
-                endOres.forEach(ore -> runGenerator(ore, world, rand, chunkX, chunkZ));
-                break;
-            default:
-                break;
+        for (OreGenParams ore : overworldOres) {
+            runGenerator(ore, world, rand, chunkX, chunkZ);
         }
     }
 
     private void runGenerator(OreGenParams ore, World world, Random rand, int chunkX, int chunkZ) {
-
-        if (ore.oreBlock == null) {
-            System.err.println("[ERREUR] Bloc null pour " + ore.name);
-            return;
-        }
-        if (ore.minHeight > ore.maxHeight || ore.minHeight < 0 || ore.maxHeight > 256) {
-            System.err.println("[ERREUR] Hauteurs invalides pour " + ore.name);
-            return;
-        }
+        // Ajoutez cette vérification au début
+        if (world.isRemote) return; // Ne pas exécuter côté client
 
         int heightDiff = ore.maxHeight - ore.minHeight + 1;
 
@@ -73,34 +55,21 @@ public class WorldGenCustomOres implements IWorldGenerator {
             int x = chunkX * 16 + rand.nextInt(16);
             int y = ore.minHeight + rand.nextInt(heightDiff);
             int z = chunkZ * 16 + rand.nextInt(16);
+
             BlockPos pos = new BlockPos(x, y, z);
 
-            // Optionnel : filtrer par biome
-            // Biome biome = world.getBiome(pos);
-            // if (!ore.allowedBiomes.isEmpty() && !ore.allowedBiomes.contains(biome.getRegistryName().toString())) {
-            //     continue;
-            // }
+            // Vérifiez que la position est dans le bon biome si nécessaire
+            Biome biome = world.getBiome(pos);
+            if (!isBiomeValid(biome)) continue;
 
-            int veinSize = ore.minVeinSize + rand.nextInt(ore.maxVeinSize - ore.minVeinSize + 1);
-            WorldGenerator gen = new WorldGenMinable(ore.oreBlock, veinSize, BlockMatcher.forBlock(ore.targetBlock));
-
-            gen.generate(world, rand, pos);
-
-            // Comptage rapide autour du point d’origine
-            int placed = 0;
-            for (int dx = -4; dx <= 4; dx++)
-                for (int dy = -4; dy <= 4; dy++)
-                    for (int dz = -4; dz <= 4; dz++)
-                        if (world.getBlockState(pos.add(dx, dy, dz)).getBlock() == ore.oreBlock.getBlock())
-                            placed++;
-
-            double ratio = placed / (double) veinSize;
-            System.out.println("[GEN] " + ore.name +
-                    " | Veine demandée : " + veinSize +
-                    " | Blocs placés : " + placed +
-                    " | Ratio : " + String.format("%.2f", ratio) +
-                    " | Pos : " + pos + " (chunk " + chunkX + "," + chunkZ + ")");
+            // Utilisez setBlockState directement au lieu de WorldGenMinable
+            if (world.getBlockState(pos).getBlock() == ore.targetBlock) {
+                world.setBlockState(pos, ore.oreBlock, 2); // Flag 2 pour éviter les updates inutiles
+            }
         }
+    }
+    private boolean isBiomeValid(Biome biome) {
+        return true;
     }
 
     /** Contient tous les paramètres d’un minerai. */
