@@ -1,0 +1,17 @@
+{
+  "display": {
+    "icon": { "item": "draconiummod:draconium_helmet" },
+    "title": { "text": "Les prémices du pouvoir" },
+    "description": { "text": "Forge ton destin en Draconium" },
+    "background": "minecraft:textures/gui/advancements/backgrounds/stone.png",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:tick"
+    }
+  }
+}

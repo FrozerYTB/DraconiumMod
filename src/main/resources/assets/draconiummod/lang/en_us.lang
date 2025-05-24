@@ -78,3 +78,12 @@ itemGroup.draconiummod_weapons=Armes du DraconiumMod
 # ========================
 item.grenade.name= Grenade
 item.sponge_on_a_stick.name=Éponge sur un bâton
+
+# ========================
+# Succès
+# ========================
+
+advancement.draconium.full_armor.title=Maître du Draconium
+advancement.draconium.full_armor.desc=Crée un équipement complet en Draconium
+advancement.draconium.bughunter.title=Bug Hunter
+advancement.draconium.bughunter.desc=Merci d’avoir signalé un bug et aidé à l’amélioration du serveur !

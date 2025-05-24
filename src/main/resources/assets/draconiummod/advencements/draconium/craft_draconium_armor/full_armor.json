@@ -1,0 +1,44 @@
+{
+  "parent": "draconiummod:draconium/craft_draconium_armor/root",
+  "display": {
+    "icon": { "item": "draconiummod:draconium_chestplate" },
+    "title": { "text": "Chevalier du Draconium" },
+    "description": { "text": "Forge l'armure complète en Draconium." },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "crafted_helmet": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "draconiummod:draconium/armor/craft_draconium_helmet"
+      }
+    },
+    "crafted_chestplate": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "draconiummod:draconium/armor/craft_draconium_chestplate"
+      }
+    },
+    "crafted_leggings": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "draconiummod:draconium/armor/craft_draconium_leggings"
+      }
+    },
+    "crafted_boots": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "draconiummod:draconium/armor/craft_draconium_boots"
+      }
+    }
+  },
+  "requirements": [
+    ["crafted_helmet"],
+    ["crafted_chestplate"],
+    ["crafted_leggings"],
+    ["crafted_boots"]
+  ]
+}

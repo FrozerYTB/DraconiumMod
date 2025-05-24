@@ -1,0 +1,22 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:written_book"
+    },
+    "title": {
+      "translate": "advancement.draconium.bughunter.title"
+    },
+    "description": {
+      "translate": "advancement.draconium.bughunter.desc"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "report": {
+      "trigger": "minecraft:tick"
+    }
+  }
+}
