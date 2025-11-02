@@ -1,33 +1,33 @@
 {
   "parent": "draconiummod:recipes/root",
   "display": {
-    "icon": { "item": "draconiummod:draconium_helmet" },
-    "title": { "text": "Casque Draconique" },
-    "description": { "text": "Forge un casque en Draconium" },
+    "icon": { "item": "draconiummod:draconium_chestplate" },
+    "title": { "text": "Plastron Draconique" },
+    "description": { "text": "Forge un plastron en Draconium" },
     "frame": "task",
     "show_toast": true,
     "announce_to_chat": false,
     "hidden": false
   },
   "criteria": {
-    "has_recipe": {
+    "recipe_unlocked": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "draconiummod:draconium/armor/craft_draconium_helmet"
+        "recipe": "draconiummod:draconium/armor/craft_draconium_chestplate"
       }
     },
-    "has_helmet": {
+    "has_draconium_chestplate": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "draconiummod:draconium_helmet"
+            "item": "draconiummod:draconium_chestplate"
           }
         ]
       }
     }
   },
   "requirements": [
-    ["has_recipe", "has_helmet"]
+    ["recipe_unlocked", "has_draconium_chestplate"]
   ]
 }

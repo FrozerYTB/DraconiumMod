@@ -42,9 +42,11 @@
     }
   },
   "requirements": [
-    ["crafted_helmet"],
-    ["crafted_chestplate"],
-    ["crafted_leggings"],
-    ["crafted_boots"]
+    [
+      "crafted_helmet",
+      "crafted_chestplate",
+      "crafted_leggings",
+      "crafted_boots"
+    ]
   ]
 }

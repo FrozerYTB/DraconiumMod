@@ -1,33 +1,33 @@
 {
   "parent": "draconiummod:recipes/root",
   "display": {
-    "icon": { "item": "draconiummod:draconium_chestplate" },
-    "title": { "text": "Plastron Draconique" },
-    "description": { "text": "Forge un plastron en Draconium" },
+    "icon": { "item": "draconiummod:draconium_leggings" },
+    "title": { "text": "Jambières Draconique" },
+    "description": { "text": "Forge un pantalon en Draconium" },
     "frame": "task",
     "show_toast": true,
     "announce_to_chat": false,
     "hidden": false
   },
   "criteria": {
-    "has_recipe": {
+    "recipe_unlocked": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "draconiummod:draconium/armor/craft_draconium_chestplate"
+        "recipe": "draconiummod:draconium/armor/craft_draconium_leggings"
       }
     },
-    "has_helmet": {
+    "has_draconium_leggings": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "draconiummod:draconium_chestplate"
+            "item": "draconiummod:draconium_leggings"
           }
         ]
       }
     }
   },
   "requirements": [
-    ["has_recipe", "has_chestplate"]
+    ["has_recipe", "has_draconium_leggings"]
   ]
 }

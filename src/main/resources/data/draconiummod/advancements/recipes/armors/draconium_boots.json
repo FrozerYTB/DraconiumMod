@@ -10,16 +10,16 @@
     "hidden": false
   },
   "criteria": {
-    "has_recipe": {
+    "recipe_unlocked": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
         "recipe": "draconiummod:draconium/armor/craft_draconium_boots"
       }
     },
-    "has_helmet": {
+    "has_draconium_boots": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "items": [
+        "items": [ 
           {
             "item": "draconiummod:draconium_boots"
           }
@@ -28,6 +28,6 @@
     }
   },
   "requirements": [
-    ["has_recipe", "has_boots"]
+    ["recipe_unlocked", "has_draconium_boots"]
   ]
 }
